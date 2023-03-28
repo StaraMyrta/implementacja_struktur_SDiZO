@@ -19,4 +19,5 @@ public:
 	void dodajNaPocz(int elem);			//dodaje zadany element na poczatku tablicy
 	void dodajNaKon(int elem);			//dodaje zadany element na koncu tablicy
 	void usun(int index);				//usuwa zadany element
+	int rozmiar();						//zwraca rozmiar tablicy
 };

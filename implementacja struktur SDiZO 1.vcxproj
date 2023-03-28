@@ -128,10 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="tablicaDynamiczna/tablicaDynamiczna.cpp" />
+	 <ClCompile Include="tablicaDynamiczna/tablicaDynamiczna.cpp" />
+	 <ClCompile Include="Menu/menu.cpp" />
+	 <ClCompile Include="Menu/menuStruktur/MenuTablicy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tablicaDynamiczna/tablicaDynamiczna.h" />
+	 <ClCompile Include="Menu/menu.h" />
+	 <ClCompile Include="Menu/obiektMenu.h" />
+	  <ClCompile Include="Menu/menuStruktur/MenuTablicy.h" />
+
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
