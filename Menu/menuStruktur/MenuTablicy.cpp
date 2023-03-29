@@ -1,18 +1,18 @@
 #include "MenuTablicy.h"
-#include "../../Test/TestTablicy/TestTablicy.h"
+#include "../../Testy/TestTablicy/TestTablicy.h"
 
 using namespace std;
 
 MenuTablicy::MenuTablicy()
 {
-    //Ustawiamy zmienne definiuj¹ce opis menu.
+    //Ustawia zmienne definiuj¹ce opis menu.
     opisMenu = "Tablica";
-    menuCommand = "tablica";
+    wywolanieMenu = "tablica";
 }
 
 void MenuTablicy::wyswietlMenu()
 {
-    //Wypisane menu dla tablicy.
+    //Wypisanie menu dla tablicy.
     cout << endl;
     cout << "Menu dla tablicy" << endl;
     cout << "1. Wczytaj z pliku (load)" << endl;
@@ -28,128 +28,118 @@ void MenuTablicy::wyswietlMenu()
 
 void MenuTablicy::wybor()
 {
-    //Tworzy nowy obiekt klasy Array i wchodzi do pêtli obs³ugi opcji.
-    tablica = new TablicaDynamiczna();
+    tablica = new TablicaDynamiczna();    //Tworzy nowy obiekt klasy TablicaDynamiczna i wchodzi do pêtli obs³ugi opcji.
     string wejscie;
     powrot = false;
     while (!powrot)
     {
         wyswietlMenu();
         cin >> wejscie;
-        if (wejscie == "load") loadFile();
-        else if (wejscie == "delete") deleteItem();
-        else if (wejscie == "add") addItem();
-        else if (wejscie == "find") findItem();
-        else if (wejscie == "rand") createRandom();
-        else if (wejscie == "disp") display();
+        if (wejscie == "load") wczytajPlik();
+        else if (wejscie == "delete") usunObiekt();
+        else if (wejscie == "add") dodajObiekt();
+        else if (wejscie == "find") znajdzObiekt();
+        else if (wejscie == "rand") stworzLosowo();
+        else if (wejscie == "disp") wyswietl();
         else if (wejscie == "test") test();
-        else if (wejscie == "back") backTyped = true;
+        else if (wejscie == "back") powrot = true;
         else cout << "Nieznane polecenie!" << endl;
     }
-    //Po wyjœciu z pêtli dealokujemy tablicê.
-    delete array;
+    delete tablica;    //Po wyjœciu z pêtli tablica zostaje zdealokowana.
 }
 
-void MenuTablicy::loadFile()
+void MenuTablicy::wczytajPlik()
 {
-    //Standardowe wczytywanie z pliku.
-    std::string fileName;
-    int count, element;
-    std::cout << "\nPodaj nazwe pliku: ";
-    std::cin >> fileName;
-    std::ifstream file;
-    file.open(fileName);
-    if (file.is_open())
+    string nazwaPliku;
+    int licznik, elem;
+    cout << "\nPodaj nazwe pliku: ";
+    cin >> nazwaPliku;
+    ifstream plik;
+    plik.open(nazwaPliku);
+    if (plik.is_open())
     {
-        delete array;
-        array = new Array();
-        file >> count;
-        for (int i = 0; i < count; i++)
+        delete tablica;
+        tablica = new TablicaDynamiczna();
+        plik >> licznik;
+        for (int i = 0; i < licznik; i++)
         {
-            file >> element;
-            array->add(element);
+            plik >> elem;
+            tablica->dodaj(elem);
         }
-        display();
+        wyswietl();
     }
-    else std::cout << "Podana nazwa pliku jest nieprawidlowa!" << std::endl;
-    file.close();
+    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
+    plik.close();
 }
 
-void MenuTablicy::deleteItem()
+void MenuTablicy::usunObiekt()
 {
-    //Usuwanie elementu dla danego indexu.
-    int index;
-    std::cout << "\nPodaj index elementu do usuniecia: ";
-    std::cin >> index;
+    int indeks;
+    cout << "\nPodaj indeks elementu do usuniecia: ";
+    cin >> indeks;
     try
     {
-        array->remove(index);
-        display();
+        tablica->usun(indeks);
+        wyswietl();
     }
-    catch (std::out_of_range& e)
+    catch (out_of_range& e)
     {
-        std::cout << e.what() << std::endl;
+        cout << e.what() << endl;
     }
 }
 
-void MenuTablicy::addItem()
+void MenuTablicy::dodajObiekt()
 {
-    //Dodawanie elementu dla danego indexu.
-    int index;
-    int element;
-    std::cout << "\nPodaj index elementu do dodania: ";
-    std::cin >> index;
-    std::cout << "Podaj wartosc elementu: ";
-    std::cin >> element;
+    int indeks;
+    int elem;
+    cout << "\nPodaj indeks elementu do dodania: ";
+    cin >> indeks;
+    cout << "Podaj wartosc elementu: ";
+    cin >> elem;
     try
     {
-        array->add(index, element);
-        display();
+        tablica->dodaj(indeks, elem);
+        wyswietl();
     }
-    catch (std::out_of_range& e)
+    catch (out_of_range& e)
     {
-        std::cout << e.what() << std::endl;
+        cout << e.what() << endl;
     }
 }
 
-void MenuTablicy::findItem()
+void MenuTablicy::znajdzObiekt()
 {
-    //Wyszukiwanie elementu.
-    int element;
-    std::cout << "\nPodaj wartosc elementu: ";
-    std::cin >> element;
-    if (array->find(element)) std::cout << "Znaleziono element o takiej wartosci!" << std::endl;
-    else std::cout << "Nie znaleziono elementu o takiej wartosci!" << std::endl;
-    display();
+    int elem;
+    cout << "\nPodaj wartosc elementu: ";
+    cin >> elem;
+    if (tablica->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" <<endl;
+    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    wyswietl();
 }
 
-void MenuTablicy::createRandom()
+void MenuTablicy::stworzLosowo()
 {
     //Dealokujemy tablicê i alokujemy pamiêæ na nowy obiekt.
-    delete array;
-    array = new Array();
-    int size;
-    std::cout << "\nPodaj wielkosc tablicy: ";
-    std::cin >> size;
-    for (int i = 0; i < size; i++) array->add(rand() % 50 + 1);
-    display();
+    delete tablica;
+    tablica = new TablicaDynamiczna();
+    int rozm;
+    cout << "\nPodaj wielkosc tablicy: ";
+    cin >> rozm;
+    for (int i = 0; i < rozm; i++) tablica->dodaj(rand() % 50 + 1);
+    wyswietl();
 }
 
-void MenuTablicy::display()
+void MenuTablicy::wyswietl()
 {
-    //Wyœwietlamy zawartoœæ tablicy.
-    std::cout << "\nZawartosc tablicy: ";
-    for (int i = 0; i < array->getSize(); i++) std::cout << array->get(i) << " ";
-    std::cout << std::endl;
+    cout << "\nZawartosc tablicy: ";
+    for (int i = 0; i < tablica->rozmiar(); i++) cout << tablica->zawartosc(i) << endl;
 }
 
 void MenuTablicy::test()
 {
-    //Tworzymy obiekt klasy testu tablicy i uruchamiamy metody.
-    auto* test = new ArrayTest();
-    test->addTestAverage();
-    test->removeTestAverage();
-    test->findTestAverage();
-    //Usuwamy obiekt z zaalokowan¹, osobn¹ tablic¹.
+    auto* test = new TestTablicy();
+    test->sredniTestDodawania();
+    test->sredniTestUsuwania();
+    test->sredniTestSzukania();
     delete test;
 }

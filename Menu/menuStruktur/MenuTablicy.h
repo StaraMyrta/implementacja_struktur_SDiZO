@@ -1,17 +1,19 @@
 #include <iostream>
-#include "../obiektMenu.h"
-#include "../../tablicaDynamiczna/tablicaDynamiczna.h"
+#include "../ObiektMenu.h"
+#include "../../TablicaDynamiczna/TablicaDynamiczna.h"
 
 class MenuTablicy : public ObiektMenu
 {
 private:
-    MenuTablicy* tablica;
+    TablicaDynamiczna* tablica;
     void wyswietlMenu() override;
     void wczytajPlik();
-    void usun();
-    void dodaj();
-    void znajdz();
+    void usunObiekt();
+    void dodajObiekt();
+    void znajdzObiekt();
+    void stworzLosowo();
     void wyswietl();
+    void test();
 public:
     MenuTablicy();
     void wybor() override;

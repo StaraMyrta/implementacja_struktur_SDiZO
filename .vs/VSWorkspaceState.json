@@ -1,9 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Debug",
     "\\Menu",
-    "\\Menu\\menuStruktur"
+    "\\Menu\\menuStruktur",
+    "\\tablicaDynamiczna",
+    "\\Testy",
+    "\\Testy\\TestTablicy"
   ],
-  "SelectedNode": "\\main.cpp",
+  "SelectedNode": "\\Testy\\TestTablicy\\TestTablicy.cpp",
   "PreviewInSolutionExplorer": false
 }

@@ -30,7 +30,7 @@ void TablicaDynamiczna::dodaj(int elem)
     }
 }
 
-void TablicaDynamiczna::add(int indeks, int elem)
+void TablicaDynamiczna::dodaj(int indeks, int elem)
 {
     //dodanie elementów dla warunków brzegowych
     if (indeks == rozm) {
@@ -65,6 +65,11 @@ void TablicaDynamiczna::dodajNaKon(int elem) {
     dodaj(rozm, elem);
 }
 
+void TablicaDynamiczna::dodajLosowo(int elem)
+{
+    dodaj(rand() % (rozm + 1), elem);
+}
+
 int TablicaDynamiczna::zawartosc(int indeks) {
     zakres(indeks);
     return baza[indeks];
@@ -83,6 +88,15 @@ void TablicaDynamiczna::usun(int indeks) {
     if (rozm == 1) {
         delete[] baza;
         rozm--;
+    }
+    else if (indeks == rozm) {
+        rozm--;
+        int* tablicaRobocza = new int[rozm];
+        kopiujTablice(baza, tablicaRobocza, rozm);
+        delete[] baza;
+        baza = new int[rozm];
+        kopiujTablice(tablicaRobocza, baza, rozm);
+        delete[] tablicaRobocza;
     }
     else {
         int* tablicaRobocza = new int[rozm];

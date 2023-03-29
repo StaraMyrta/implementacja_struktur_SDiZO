@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "Menu.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ Menu::~Menu()
     }
 }
 
-void Menu::dodajMenu(obiektMenu* obiekt)
+void Menu::dodajMenu(ObiektMenu* obiekt)
 {
     //Dodaje menu.
     obiekty.push_back(obiekt);
@@ -25,7 +25,7 @@ void Menu::wyswietlMenu()
     cout << endl;
     cout << "Menu aplikacji" << endl;
     int i = 1;
-    for (obiektMenu* obiekt : obiekty)
+    for (ObiektMenu* obiekt : obiekty)
     {
         cout << i << ". " << obiekt -> pokazOpisMenu() << endl;
         i++;
@@ -52,7 +52,7 @@ void Menu::wybor()
             nieznanaKomenda = false;
         }
 
-        for (obiektMenu* obiekt : obiekty)
+        for (ObiektMenu* obiekt : obiekty)
         {
             if (wejscie == obiekt -> pokazKomende())
             {

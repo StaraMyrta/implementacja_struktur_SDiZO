@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <ctime>
-#include "menu/menu.h"
+#include "Menu/Menu.h"
 
 using namespace std;
 

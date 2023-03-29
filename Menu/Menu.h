@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "obiektMenu.h"
-#include "menuStruktur/menuTablicy.h"
+#include "ObiektMenu.h"
+#include "MenuStruktur/MenuTablicy.h"
 
 // Klasa dla g³ównego menu programu.
 class Menu

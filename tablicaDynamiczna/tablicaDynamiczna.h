@@ -4,7 +4,7 @@
 
 class TablicaDynamiczna {
 private:
-	const std::string EXCEPTION_DESC = "Nieprawidlowy index!";
+	const std::string EXCEPTION_DESC = "Nieprawidlowy indeks!";
 	int * baza;							//wskaünik na poczπtek tablicy
 	int rozm;
 	void zakres(int indeks);					//sprawdzenie czy tablica obejmuje podany indeks
@@ -18,6 +18,7 @@ public:
 	void dodaj(int indeks, int elem);	//dodaje zadany element w zadanym miejscu w tablicy
 	void dodajNaPocz(int elem);			//dodaje zadany element na poczatku tablicy
 	void dodajNaKon(int elem);			//dodaje zadany element na koncu tablicy
+	void dodajLosowo(int elem);			//dodaje zadany element w losowym miejscu w tablicy
 	void usun(int index);				//usuwa zadany element
 	int rozmiar();						//zwraca rozmiar tablicy
 };
