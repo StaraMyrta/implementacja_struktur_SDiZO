@@ -115,6 +115,11 @@ void TablicaDynamiczna::usun(int indeks) {
     }
 }
 
+void TablicaDynamiczna::usunLosowo()
+{
+    if (rozm > 0) usun(rand() % rozm);
+}
+
 int TablicaDynamiczna::rozmiar()
 {
     return rozm;

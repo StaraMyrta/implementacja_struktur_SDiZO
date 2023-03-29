@@ -3,11 +3,13 @@
     "",
     "\\Debug",
     "\\Menu",
-    "\\Menu\\menuStruktur",
-    "\\tablicaDynamiczna",
+    "\\Menu\\MenuStruktur",
+    "\\TablicaDynamiczna",
     "\\Testy",
-    "\\Testy\\TestTablicy"
+    "\\Testy\\TestTablicy",
+    "\\x64\\Debug",
+    "\\x64\\Debug\\implemen.4ce7faed.tlog"
   ],
-  "SelectedNode": "\\Testy\\TestTablicy\\TestTablicy.cpp",
+  "SelectedNode": "\\implementacja struktur SDiZO 1.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-/// Klasa abstrakcyjna reprezentuj¹ca menu poszczególnych struktur.
+//Klasa abstrakcyjna reprezentuj¹ca menu poszczególnych struktur.
 class ObiektMenu
 {
 protected:      

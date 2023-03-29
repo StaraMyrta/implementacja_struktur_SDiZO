@@ -132,13 +132,10 @@
 	 <ClCompile Include="Menu/Menu.cpp" />
 	 <ClCompile Include="Menu/MenuStruktur/MenuTablicy.cpp" />
 	 <ClCompile Include="Testy/TestTablicy/TestTablicy.cpp" />
+	 <ClCompile Include="Testy/Pomiar.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TablicaDynamiczna/TablicaDynamiczna.h" />
-	 <ClCompile Include="Menu/Menu.h" />
-	 <ClCompile Include="Menu/ObiektMenu.h" />
-	  <ClCompile Include="Menu/MenuStruktur/MenuTablicy.h" />
-	  <ClCompile Include="Testy/TestTablicy/TestTablicy.h" />
+	  <ClCompile Include="Menu/ObiektMenu.h" />
 
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

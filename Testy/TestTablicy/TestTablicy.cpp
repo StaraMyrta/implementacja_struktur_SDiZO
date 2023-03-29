@@ -16,7 +16,7 @@ void TestTablicy::wypelnijTablice(int rozm)    //Dealokuje tablicê i przydziela 
 {
     delete tablica;
     tablica = new TablicaDynamiczna();
-    for (int i = 0; i < rozm; i++) tablica->dodaj(rand() % size);
+    for (int i = 0; i < rozm; i++) tablica->dodaj(rand() % rozm);
 }
 
 void TestTablicy::sredniTestDodawania()
@@ -111,7 +111,7 @@ double TestTablicy::dodajNaPoczTest(int rozm)
         pomiar.czasStart();
         tablica->dodajNaPocz(elem);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -127,7 +127,7 @@ double TestTablicy::dodajNaKoniecTest(int rozm)
         pomiar.czasStart();
         tablica->dodaj(elem);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -143,7 +143,7 @@ double TestTablicy::dodajLosowoTest(int rozm)
         pomiar.czasStart();
         tablica->dodajLosowo(elem);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -156,9 +156,9 @@ double TestTablicy::usunNaPoczTest(int rozm)
     {
         wypelnijTablice(rozm);
         pomiar.czasStart();
-        array->usun(0);
+        tablica->usun(0);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -174,7 +174,7 @@ double TestTablicy::usunNaKonTest(int rozm)
         pomiar.czasStart();
         tablica->usun(indeks);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -189,7 +189,7 @@ double TestTablicy::usunLosowoTest(int rozm)
         pomiar.czasStart();
         tablica->usunLosowo();
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }
@@ -205,7 +205,7 @@ double TestTablicy::znajdzTest(int rozm)
         pomiar.czasStart();
         tablica->znajdz(elem);
         pomiar.czasStop();
-        srednia += pomiar.czasTrwania();
+        srednia += pomiar.jakiCzasTrwania();
     }
     return srednia / 100;
 }

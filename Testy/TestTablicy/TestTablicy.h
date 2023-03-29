@@ -1,12 +1,13 @@
+#pragma once
 #include "../../TablicaDynamiczna/TablicaDynamiczna.h"
-//#include "../Measurement.h"
+#include "../Pomiar.h"
 
 //Klasa s³u¿¹ca do testowania wydajnoœci operacji na tablicy.
 class TestTablicy
 {
 private:
     TablicaDynamiczna* tablica;                 //WskaŸnik na obiekt klasy tablicy.
-    //Measurement measurement;                  //Obiekt klasy s³u¿acej do wykonywania pomiarów.
+    Pomiar pomiar;                              //Obiekt klasy s³u¿acej do wykonywania pomiarów.
     void wypelnijTablice(int rozm);             //Wype³nia tablicê losowymi liczbami z przedzia³u [0, rozm - 1].
 
     double dodajNaPoczTest(int rozm);           //Testuje wydajnoœæ dodawania elementu z przodu dla tablicy o 'rozm' elementach.
