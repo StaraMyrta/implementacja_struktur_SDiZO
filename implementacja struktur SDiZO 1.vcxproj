@@ -130,7 +130,6 @@
     <ClCompile Include="main.cpp" />
 	 <ClCompile Include="TablicaDynamiczna/TablicaDynamiczna.cpp" />
 	 <ClCompile Include="Menu/Menu.cpp" />
-	 <ClCompile Include="Menu/MenuStruktur/MenuTablicy.cpp" />
 	 <ClCompile Include="Testy/TestTablicy/TestTablicy.cpp" />
 	 <ClCompile Include="Testy/Pomiar.cpp" />
   </ItemGroup>

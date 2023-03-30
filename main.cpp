@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <ctime>
 #include "Menu/Menu.h"
-#include "Menu/MenuStruktur/MenuTablicy.h"
 
 using namespace std;
 
@@ -11,9 +10,7 @@ int main()
     system("@chcp 65001 >nul");
 
     auto* menu = new Menu();
-    auto* tablica = new MenuTablicy();
-    menu->dodajMenu(tablica);
-    menu->wybor();
+    menu->wyborStruktury();
     delete menu;
     return 0;
 }

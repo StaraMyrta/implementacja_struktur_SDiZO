@@ -12,7 +12,7 @@ private:
 public:
 
     Pomiar();              //Konstruktor klasy.
-    ~Pomiar();                  //Dekonstruktor klasy.
+ //   ~Pomiar();                  //Dekonstruktor klasy.
     void czasStart();          //Rozpoczyna odmierzanie czasu.
     void czasStop();           //Koñczy odmierzanie czasu.
     double jakiCzasTrwania();       //Zwraca czas w mikrosekundach, który up³yn¹³ dla ostatniego pomiaru.

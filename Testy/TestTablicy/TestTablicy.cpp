@@ -43,7 +43,7 @@ void TestTablicy::sredniTestDodawania()
     wyniki[2][3] = dodajLosowoTest(10000);
     wyniki[2][4] = dodajLosowoTest(20000);
 
-    cout << "\nDodawanie front/back/random dla 1000, 2000, 5000, 10000, 20000 elementow: " << std::endl;
+    cout << "\nDodawanie front/back/random dla 1000, 2000, 5000, 10000, 20000 elementow: " << endl;
     for (auto& wynik : wyniki)
     {
         for (double j : wynik) cout << j << " us" << endl;
@@ -75,7 +75,7 @@ void TestTablicy::sredniTestUsuwania()
     wyniki[2][3] = usunNaKonTest(10000);
     wyniki[2][4] = usunNaKonTest(20000);
 
-    cout << "Usuwanie front/back/random dla 1000, 2000, 5000, 10000, 20000 elementow: " << std::endl;
+    cout << "Usuwanie front/back/random dla 1000, 2000, 5000, 10000, 20000 elementow: " << endl;
     for (auto& wynik : wyniki)
     {
         for (double j : wynik) cout << j << " us" << endl;
