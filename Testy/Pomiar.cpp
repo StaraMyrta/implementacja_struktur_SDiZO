@@ -9,18 +9,17 @@ Pomiar::Pomiar()
 
 void Pomiar::czasStart()
 {
-    licznikWlaczony = chrono::high_resolution_clock::now();    //Ustawia pocz¹tkowy czas wykonywania.
+    licznikWlaczony = chrono::high_resolution_clock::now();         //Ustawienie pocz¹tkowego czasu wykonywania.
 }
 
 void Pomiar::czasStop()
 {
-    //Ustawiamy koñcowy czas wykonywania i zapisujemy ró¿nicê do 'duration'.
-    licznikWylaczony = chrono::high_resolution_clock::now();
+    licznikWylaczony = chrono::high_resolution_clock::now();        //Ustawienie koñcowego czasu wykonywania i zapisanie ró¿nicy do 'czasTrwania'.
     chrono::duration<double, micro> time = licznikWylaczony - licznikWlaczony;
     czasTrwania = time.count();
 }
 
 double Pomiar::jakiCzasTrwania()
 {
-    return czasTrwania;
+    return czasTrwania;                                             //Zwrócenie czasu trwania testowanej operacji.
 }

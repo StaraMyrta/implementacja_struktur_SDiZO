@@ -7,8 +7,7 @@ Menu::Menu() = default;
 
 void Menu::wyborStruktury()
 {
-    //Wybór struktury.
-    cout << endl;
+    cout << endl;                                               //Wybór struktury.
     cout << "Wybierz strukture:" << endl;
     cout << "1. Tablica Dynamiczna (1)" << endl;
     cout << "2. Lista Dwukierunkowa (2)" << endl;
@@ -17,21 +16,18 @@ void Menu::wyborStruktury()
     cout << "5. Drzewo Czerwono-Czarne (5)" << endl;
     cout << "6. Wroc (powrot)" << endl;
     cout << "Wybierz opcje: ";
-    //Wczytuje dane z konsoli do 'wejscie' i wykonuje funkcjê 'wybor()'
-    //dla elementu menu, którego komenda zgadza siê z podan¹.
-    powrot = false;
+    powrot = false;                                             //Wczytanie danych z konsoli do 'wejscie' i wywo³anie menu wybranej struktury.
     while (!powrot)
     {
         cin >> wejscie;
-        nieznanaKomenda = true;
-        //Jeœli komenda to 'powrot' ustawia flagi aby umo¿liwiæ wyjœcie z pêtli.
+        nieznanaKomenda = true;                                 //Jeœli komenda to 'powrot' ustawione zostaj¹ flagi umo¿liwiaj¹ce wyjœcie z pêtli.
         if (wejscie == "powrot")
         {
             powrot = true;
             nieznanaKomenda = false;
         }
         else if (wejscie == "1") menuTablicy();
-        //else if (wejscie == "2") menuListy();
+        else if (wejscie == "2") menuListy();
         //else if (wejscie == "3") menuKopca();
         //else if (wejscie == "4") menuBST();
         //else if (wejscie == "5") menuCC();
@@ -41,9 +37,7 @@ void Menu::wyborStruktury()
 
 void Menu::menuTablicy()
 {
-    //tablica = new TablicaDynamiczna();    //Tworzy nowy obiekt klasy TablicaDynamiczna i wchodzi do pêtli obs³ugi opcji.
-    //Wybór operacji.
-    cout << endl;
+    cout << endl;                                               //Wybór operacji.
     cout << "Menu dla tablicy:" << endl;
     cout << "1. Wczytaj z pliku (T1)" << endl;
     cout << "2. Usun (T2)" << endl;
@@ -69,7 +63,7 @@ void Menu::menuTablicy()
         else if (wejscie == "powrot") powrot = true;
         else cout << "Nieznane polecenie!" << endl;
     }
-    delete tablica;    //Po wyjœciu z pêtli tablica zostaje zdealokowana.
+    delete tablica;                                             //Po wyjœciu z pêtli tablica zostaje zdealokowana.
 }
 
 void Menu::wczytajPlikDoTablicy()
@@ -147,7 +141,7 @@ void Menu::znajdzTablica()
 
 void Menu::stworzLosowoTablica()
 {
-    delete tablica;
+    delete tablica;                                                 //Dealokacja tablicy i rezerwacja pamiêci na nowy obiekt.
     tablica = new TablicaDynamiczna();
     int rozm;
     cout << "\nPodaj wielkosc tablicy: ";
@@ -164,7 +158,7 @@ void Menu::wyswietlTablica()
     menuTablicy();
 }
 
-void Menu::testTablica()
+void Menu::testTablica()                                            //Stworzenie obiektu klasy testu tablicy i uruchomienie metody.
 {
     auto* test = new TestTablicy();
     test->sredniTestDodawania();
@@ -172,4 +166,134 @@ void Menu::testTablica()
     test->sredniTestSzukania();
     delete test;
     menuTablicy();
+}
+
+void Menu::menuListy()
+{
+    cout << endl;                                                   //Wybór operacji.
+    cout << "Menu dla listy:" << endl;
+    cout << "1. Wczytaj z pliku (L1)" << endl;
+    cout << "2. Usun (L2)" << endl;
+    cout << "3. Dodaj (L3)" << endl;
+    cout << "4. Znajdz (L4)" << endl;
+    cout << "5. Utworz losowo (L5)" << endl;
+    cout << "6. Wyswietl (L6)" << endl;
+    cout << "7. Testuj (L7)" << endl;
+    cout << "8. Wroc (powrot)" << endl;
+    cout << "Wybierz opcje: ";
+
+    powrot = false;
+    while (!powrot)
+    {
+        cin >> wejscie;
+        if (wejscie == "L1") wczytajPlikDoListy();
+        else if (wejscie == "L2") usunLista();
+        else if (wejscie == "L3") dodajLista();
+        else if (wejscie == "L4") znajdzLista();
+        else if (wejscie == "L5") stworzLosowoLista();
+        else if (wejscie == "L6") wyswietlLista();
+        else if (wejscie == "L7") testLista();
+        else if (wejscie == "powrot") powrot = true;
+        else cout << "Nieznane polecenie!" << endl;
+    }
+
+    delete lista;                                                   //Po wyjœciu z pêtli lista zostaje zdealokowana.
+}
+
+void Menu::wczytajPlikDoListy()
+{
+    string nazwaPliku;
+    int licznik, elem;
+    cout << "\nPodaj nazwe pliku: ";
+    cin >> nazwaPliku;
+    ifstream plik;
+    plik.open(nazwaPliku);
+    if (plik.is_open())
+    {
+        delete lista;
+        lista = new ListaDwukierunkowa();
+        plik >> licznik;
+        for (int i = 0; i < licznik; i++)
+        {
+            plik >> elem;
+            lista->dodajNaKon(elem);
+        }
+        wyswietlLista();
+    }
+    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
+    plik.close();
+    menuListy();
+}
+
+void Menu::usunLista()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu do usuniecia: ";
+    cin >> elem;
+    if (!lista->usunWartosc(elem))
+        cout << "Nie znaleziono takiego elementu!" << endl;
+    wyswietlLista();
+    menuListy();
+}
+
+void Menu::dodajLista()
+{
+    int indeks;
+    int elem;
+    cout << "\nPodaj index elementu do dodania: ";
+    cin >> indeks;
+    cout << "Podaj wartosc elementu: ";
+    cin >> elem;
+    try
+    {
+        if (indeks == 0) lista->dodajNaPocz(elem);
+        else lista->dodajZa(indeks - 1, elem);
+        wyswietlLista();
+    }
+    catch (out_of_range& e)
+    {
+        cout << e.what() << endl;
+    }
+    menuListy();
+}
+
+void Menu::znajdzLista()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu: ";
+    cin >> elem;
+    if (lista->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
+    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    wyswietlLista();
+    menuListy();
+}
+
+void Menu::stworzLosowoLista()
+{
+    delete lista;                                               //Dealokacja listy i rezerwacja pamiêci na nowy obiekt.
+    lista = new ListaDwukierunkowa();
+    int rozm;
+    cout << "\nPodaj wielkosc listy: ";
+    cin >> rozm;
+    for (int i = 0; i < rozm; i++) lista->dodajNaKon(rand() % 50 + 1);
+    wyswietlLista();
+    menuListy();
+}
+
+void Menu::wyswietlLista()
+{
+    cout << "\nZawartosc listy (od poczatku do konca): ";
+    for (int i = 0; i < lista->rozmiar(); i++) cout << lista->zawartosc(i) << endl;
+    menuListy();
+}
+
+void Menu::testLista()
+{
+    auto* test = new TestListy();                               //Stworzenie obiektu klasy testu listy i uruchomienie metody.
+    test->sredniTestDodawania();
+    test->sredniTestUsuwania();
+    test->sredniTestSzukania();
+
+    delete test;
+    menuListy();
 }

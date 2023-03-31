@@ -2,12 +2,12 @@
 
 TablicaDynamiczna::TablicaDynamiczna()
 {
-    this->rozm = 0;
+    this->rozm = 0;                         //Ustawienie wielkoœci tablicy na 0.
 }
 
 TablicaDynamiczna::~TablicaDynamiczna()
 {
-    if (rozm > 0) delete[] baza;
+    if (rozm > 0) delete[] baza;                                    //Usuniêcie zalokowanej pamiêci, jeœli jest zalokowana.
 }
 
 void TablicaDynamiczna::dodaj(int elem)

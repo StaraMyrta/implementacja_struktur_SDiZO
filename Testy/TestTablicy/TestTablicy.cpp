@@ -12,7 +12,7 @@ TestTablicy::~TestTablicy()
     delete tablica;
 }
 
-void TestTablicy::wypelnijTablice(int rozm)    //Dealokuje tablicê i przydziela pamiêæ dla nowego obiektu.
+void TestTablicy::wypelnijTablice(int rozm)     //Dealokacja tablicy i przydzielenie pamiêci dla nowego obiektu.
 {
     delete tablica;
     tablica = new TablicaDynamiczna();
@@ -21,23 +21,20 @@ void TestTablicy::wypelnijTablice(int rozm)    //Dealokuje tablicê i przydziela 
 
 void TestTablicy::sredniTestDodawania()
 {
-    //Testy dodawania elementów z przodu tablicy.
-    double wyniki[3][5];
+    double wyniki[3][5];                        //Testy dodawania elementów z przodu tablicy.
     wyniki[0][0] = dodajNaPoczTest(1000);
     wyniki[0][1] = dodajNaPoczTest(2000);
     wyniki[0][2] = dodajNaPoczTest(5000);
     wyniki[0][3] = dodajNaPoczTest(10000);
     wyniki[0][4] = dodajNaPoczTest(20000);
 
-    //Testy dodawania elementów z ty³u tablicy.
-    wyniki[1][0] = dodajNaKoniecTest(1000);
+    wyniki[1][0] = dodajNaKoniecTest(1000);     //Testy dodawania elementów z ty³u tablicy.
     wyniki[1][1] = dodajNaKoniecTest(2000);
     wyniki[1][2] = dodajNaKoniecTest(5000);
     wyniki[1][3] = dodajNaKoniecTest(10000);
     wyniki[1][4] = dodajNaKoniecTest(20000);
 
-    //Testy dodawania elementów w losowym miejscu tablicy.
-    wyniki[2][0] = dodajLosowoTest(1000);
+    wyniki[2][0] = dodajLosowoTest(1000);       //Testy dodawania elementów w losowym miejscu tablicy.
     wyniki[2][1] = dodajLosowoTest(2000);
     wyniki[2][2] = dodajLosowoTest(5000);
     wyniki[2][3] = dodajLosowoTest(10000);
@@ -53,23 +50,20 @@ void TestTablicy::sredniTestDodawania()
 
 void TestTablicy::sredniTestUsuwania()
 {
-    //Testy usuwania elementów z przodu tablicy.
-    double wyniki[3][5];
+    double wyniki[3][5];                        //Testy usuwania elementów z przodu tablicy.
     wyniki[0][0] = usunNaPoczTest(1000);
     wyniki[0][1] = usunNaPoczTest(2000);
     wyniki[0][2] = usunNaPoczTest(5000);
     wyniki[0][3] = usunNaPoczTest(10000);
     wyniki[0][4] = usunNaPoczTest(20000);
 
-    //Testy usuwania elementów z ty³u tablicy.
-    wyniki[1][0] = usunNaKonTest(1000);
+    wyniki[1][0] = usunNaKonTest(1000);         //Testy usuwania elementów z ty³u tablicy.
     wyniki[1][1] = usunNaKonTest(2000);
     wyniki[1][2] = usunNaKonTest(5000);
     wyniki[1][3] = usunNaKonTest(10000);
     wyniki[1][4] = usunNaKonTest(20000);
 
-    //Testy usuwania elementów z losowego miejsca tablicy.
-    wyniki[2][0] = usunNaKonTest(1000);
+    wyniki[2][0] = usunNaKonTest(1000);         //Testy usuwania elementów z losowego miejsca tablicy.
     wyniki[2][1] = usunNaKonTest(2000);
     wyniki[2][2] = usunNaKonTest(5000);
     wyniki[2][3] = usunNaKonTest(10000);
@@ -85,8 +79,8 @@ void TestTablicy::sredniTestUsuwania()
 
 void TestTablicy::sredniTestSzukania()
 {
-    //Testy wyszukiwania elementów dla ró¿nych rozmiarów struktury.
-    double wyniki[5];
+
+    double wyniki[5];                           //Testy wyszukiwania elementów dla ró¿nych rozmiarów struktury.
     wyniki[0] = znajdzTest(1000);
     wyniki[1] = znajdzTest(2000);
     wyniki[2] = znajdzTest(5000);
@@ -102,8 +96,8 @@ void TestTablicy::sredniTestSzukania()
 
 double TestTablicy::dodajNaPoczTest(int rozm)
 {
-    //Wynik to œrednia ze 100 dodañ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+
+    double srednia = 0;                         //Wynik to œrednia ze 100 dodañ na pocz¹tek tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -118,8 +112,7 @@ double TestTablicy::dodajNaPoczTest(int rozm)
 
 double TestTablicy::dodajNaKoniecTest(int rozm)
 {
-    //Wynik to œrednia ze 100 dodañ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 dodañ na koniec tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -134,8 +127,7 @@ double TestTablicy::dodajNaKoniecTest(int rozm)
 
 double TestTablicy::dodajLosowoTest(int rozm)
 {
-    //Wynik to œrednia ze 100 dodañ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 dodañ na losowym miejscu w tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -150,8 +142,7 @@ double TestTablicy::dodajLosowoTest(int rozm)
 
 double TestTablicy::usunNaPoczTest(int rozm)
 {
-    //Wynik to œrednia ze 100 usuniêæ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 usuniêæ z pocz¹tku tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -165,8 +156,7 @@ double TestTablicy::usunNaPoczTest(int rozm)
 
 double TestTablicy::usunNaKonTest(int rozm)
 {
-    //Wynik to œrednia ze 100 usuniêæ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 usuniêæ z koñca tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -181,8 +171,7 @@ double TestTablicy::usunNaKonTest(int rozm)
 
 double TestTablicy::usunLosowoTest(int rozm)
 {
-    //Wynik to œrednia ze 100 usuniêæ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 usuniêæ z losowego miejsca w tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
@@ -196,8 +185,7 @@ double TestTablicy::usunLosowoTest(int rozm)
 
 double TestTablicy::znajdzTest(int rozm)
 {
-    //Wynik to œrednia ze 100 wyszukañ ze zmienionym za ka¿dym razem datasetem.
-    double srednia = 0;
+    double srednia = 0;                         //Wynik to œrednia ze 100 wyszukiwañ w tablicy o zmienianych za ka¿dym razem danych.
     for (int i = 0; i < 100; i++)
     {
         wypelnijTablice(rozm);
