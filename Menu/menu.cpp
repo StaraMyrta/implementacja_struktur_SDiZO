@@ -26,9 +26,21 @@ void Menu::wyborStruktury()
             powrot = true;
             nieznanaKomenda = false;
         }
-        else if (wejscie == "1") menuTablicy();
-        else if (wejscie == "2") menuListy();
-        //else if (wejscie == "3") menuKopca();
+        else if (wejscie == "1")
+        {
+            tablica = new TablicaDynamiczna();
+            menuTablicy();
+        }
+        else if (wejscie == "2")
+        {
+            lista = new ListaDwukierunkowa(); 
+            menuListy();
+        }
+        else if (wejscie == "3")
+        {
+            kopiec = new KopiecBinarny();
+            menuKopca();
+        }
         //else if (wejscie == "4") menuBST();
         //else if (wejscie == "5") menuCC();
 
@@ -64,6 +76,7 @@ void Menu::menuTablicy()
         else cout << "Nieznane polecenie!" << endl;
     }
     delete tablica;                                             //Po wyjœciu z pêtli tablica zostaje zdealokowana.
+    wyborStruktury();
 }
 
 void Menu::wczytajPlikDoTablicy()
@@ -146,7 +159,7 @@ void Menu::stworzLosowoTablica()
     int rozm;
     cout << "\nPodaj wielkosc tablicy: ";
     cin >> rozm;
-    for (int i = 0; i < rozm; i++) tablica->dodaj(rand() % 50 + 1);
+    for (int i = 0; i < rozm; i++) tablica->dodaj((rand() % 4294967296));
     wyswietlTablica();
     menuTablicy();
 }
@@ -198,6 +211,7 @@ void Menu::menuListy()
     }
 
     delete lista;                                                   //Po wyjœciu z pêtli lista zostaje zdealokowana.
+    wyborStruktury();
 }
 
 void Menu::wczytajPlikDoListy()
@@ -240,7 +254,7 @@ void Menu::dodajLista()
 {
     int indeks;
     int elem;
-    cout << "\nPodaj index elementu do dodania: ";
+    cout << "\nPodaj indeks elementu do dodania: ";
     cin >> indeks;
     cout << "Podaj wartosc elementu: ";
     cin >> elem;
@@ -275,7 +289,7 @@ void Menu::stworzLosowoLista()
     int rozm;
     cout << "\nPodaj wielkosc listy: ";
     cin >> rozm;
-    for (int i = 0; i < rozm; i++) lista->dodajNaKon(rand() % 50 + 1);
+    for (int i = 0; i < rozm; i++) lista->dodajNaKon((rand() % 4294967296));
     wyswietlLista();
     menuListy();
 }
@@ -283,7 +297,9 @@ void Menu::stworzLosowoLista()
 void Menu::wyswietlLista()
 {
     cout << "\nZawartosc listy (od poczatku do konca): ";
-    for (int i = 0; i < lista->rozmiar(); i++) cout << lista->zawartosc(i) << endl;
+    for (int i = 0; i < lista->rozmiar(); i++) cout << lista->zawartosc(i) << ", ";
+    cout << "\nZawartosc listy (od konca do poczatku): ";
+    for (int i = lista->rozmiar() - 1; i >= 0; i--) cout << lista->zawartosc(i) << ", ";
     menuListy();
 }
 
@@ -296,4 +312,124 @@ void Menu::testLista()
 
     delete test;
     menuListy();
+}
+
+void Menu::menuKopca()
+{
+    cout << endl;                                                   //Wybór operacji.
+    cout << "Menu dla kopca:" << endl;
+    cout << "1. Wczytaj z pliku (K1)" << endl;
+    cout << "2. Usun (K2)" << endl;
+    cout << "3. Dodaj (K3)" << endl;
+    cout << "4. Znajdz (K4)" << endl;
+    cout << "5. Utworz losowo (K5)" << endl;
+    cout << "6. Wyswietl (K6)" << endl;
+    cout << "7. Testuj (K7)" << endl;
+    cout << "8. Wroc (powrot)" << endl;
+    cout << "Wybierz opcje: ";
+
+    powrot = false;
+    while (!powrot)
+    {
+        cin >> wejscie;
+        if (wejscie == "K1") wczytajPlikDoKopca();
+        else if (wejscie == "K2") usunKopiec();
+        else if (wejscie == "K3") dodajKopiec();
+        else if (wejscie == "K4") znajdzKopiec();
+        else if (wejscie == "K5") stworzLosowoKopiec();
+        else if (wejscie == "K6") wyswietlKopiec();
+        else if (wejscie == "K7") testKopiec();
+        else if (wejscie == "powrot") powrot = true;
+        else cout << "Nieznane polecenie!" << endl;
+    }
+
+    delete kopiec;                                                   //Po wyjœciu z pêtli kopiec zostaje zdealokowany.
+    wyborStruktury();
+}
+
+
+void Menu::wczytajPlikDoKopca()
+{
+    string nazwaPliku;
+    int licznik, elem;
+    cout << "\nPodaj nazwe pliku: ";
+    cin >> nazwaPliku;
+    ifstream plik;
+    plik.open(nazwaPliku);
+    if (plik.is_open())
+    {
+        delete kopiec;
+        kopiec = new KopiecBinarny();
+        plik >> licznik;
+        for (int i = 0; i < licznik; i++)
+        {
+            plik >> elem;
+            kopiec->dodaj(elem);
+        }
+        wyswietlKopiec();
+    }
+    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
+    plik.close();
+    menuKopca();
+}
+
+void Menu::usunKopiec()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu do usuniecia: ";
+    cin >> elem;
+    if (!kopiec->usun(elem))
+        cout << "Nie znaleziono takiego elementu!" << endl;
+    wyswietlKopiec();
+    menuKopca();
+}
+
+void Menu::dodajKopiec()
+{
+    int elem;
+    cout << "Podaj wartosc elementu: ";
+    cin >> elem;
+    kopiec->dodaj(elem);
+    
+    menuKopca();
+}
+
+void Menu::znajdzKopiec()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu: ";
+    cin >> elem;
+    if (kopiec->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
+    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    wyswietlKopiec();
+    menuKopca();
+}
+
+void Menu::stworzLosowoKopiec()
+{
+    delete kopiec;                                               //Dealokacja listy i rezerwacja pamiêci na nowy obiekt.
+    kopiec = new KopiecBinarny();
+    int rozm;
+    cout << "\nPodaj wielkosc kopca: ";
+    cin >> rozm;
+    for (int i = 0; i < rozm; i++) kopiec->dodaj((rand() % 4294967296));
+    wyswietlKopiec();
+    menuKopca();
+}
+
+void Menu::wyswietlKopiec()
+{
+    cout << endl;
+    kopiec->wyswietlDrzewo();
+}
+
+void Menu::testKopiec()
+{
+    auto* test = new TestKopca();                               //Stworzenie obiektu klasy testu listy i uruchomienie metody.
+    test->sredniTestDodawania();
+    test->sredniTestUsuwania();
+    test->sredniTestSzukania();
+
+    delete test;
+    menuKopca();
 }

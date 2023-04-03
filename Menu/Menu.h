@@ -6,6 +6,8 @@
 #include "../Testy/TestTablicy/TestTablicy.h"
 #include "../ListaDwukierunkowa/ListaDwukierunkowa.h"
 #include "../Testy/TestListy/TestListy.h"
+#include "../KopiecBinarny/KopiecBinarny.h"
+#include "../Testy/TestKopca/TestKopca.h"
 
 // Klasa dla g³ównego menu programu.
 class Menu
@@ -14,6 +16,7 @@ private:
     //WskaŸniki na obiekty struktur
     TablicaDynamiczna* tablica;
     ListaDwukierunkowa* lista;
+    KopiecBinarny* kopiec;
     string wejscie;
     bool powrot = false;                        //Zmienna przechowuj¹ca informacjê o wybraniu komendy zakoñczenia programu.
     bool nieznanaKomenda = true;                //Zmienna przechowuj¹ca informacjê o nierozpoznaniu komendy programu.
@@ -30,13 +33,23 @@ private:
 
     //Funkcje powi¹zane z list¹ dwukierunkow¹
     void menuListy();                           //Wyœwietla menu wyboru operacji na liœcie dwukierunkowej.
-    void wczytajPlikDoListy();                //Wczytuje dane z pliku do listy dwukierunkowej.
-    void usunLista();                         //Wywo³anie funkcji usuniêcia wybranego elementu z listy dwukierunkowej.
-    void dodajLista();                        //Wywo³anie funkcji dodania wybranego elementu do listy dwukierunkowej.
-    void znajdzLista();                       //Wywo³anie funkcji znalezienia wybranego elementu w liœcie dwukierunkowej.
-    void stworzLosowoLista();                 //Wywo³anie funkcji tworzacej listê dwukierunkow¹ wype³nion¹ losowymi wartoœciami o zadanym rozmiarze.
-    void wyswietlLista();                     //Wyœwietlenie zawartoœci listy.
-    void testLista();                         //Wywo³anie testów dla listy dwukierunkowej.
+    void wczytajPlikDoListy();                  //Wczytuje dane z pliku do listy dwukierunkowej.
+    void usunLista();                           //Wywo³anie funkcji usuniêcia wybranego elementu z listy dwukierunkowej.
+    void dodajLista();                          //Wywo³anie funkcji dodania wybranego elementu do listy dwukierunkowej.
+    void znajdzLista();                         //Wywo³anie funkcji znalezienia wybranego elementu w liœcie dwukierunkowej.
+    void stworzLosowoLista();                   //Wywo³anie funkcji tworzacej listê dwukierunkow¹ wype³nion¹ losowymi wartoœciami o zadanym rozmiarze.
+    void wyswietlLista();                       //Wyœwietlenie zawartoœci listy.
+    void testLista();                           //Wywo³anie testów dla listy dwukierunkowej.
+
+    //Funkcje powi¹zane z kopcem binarnym
+    void menuKopca();                           //Wyœwietla menu wyboru operacji na kopcu binarnym.
+    void wczytajPlikDoKopca();                  //Wczytuje dane z pliku do kopca binarnego.
+    void usunKopiec();                          //Wywo³anie funkcji usuniêcia wybranego elementu z kopca binarnego.
+    void dodajKopiec();                         //Wywo³anie funkcji dodania wybranego elementu do kopca binarnego.
+    void znajdzKopiec();                        //Wywo³anie funkcji znalezienia wybranego elementu w kopcu binarnym.
+    void stworzLosowoKopiec();                  //Wywo³anie funkcji tworzacej kopiec binarny wype³niony losowymi wartoœciami o zadanym rozmiarze.
+    void wyswietlKopiec();                      //Wyœwietlenie zawartoœci kopca binarnego.
+    void testKopiec();                          //Wywo³anie testów dla kopca binarnego.
 
 public:
     Menu();                                     //Konstruktor klasy menu.
