@@ -131,10 +131,12 @@
 	 <ClCompile Include="TablicaDynamiczna/TablicaDynamiczna.cpp" />
 	  <ClCompile Include="ListaDwukierunkowa/ListaDwukierunkowa.cpp" />
 	  <ClCompile Include="KopiecBinarny/KopiecBinarny.cpp" />
+	  <ClCompile Include="Drzewa/DrzewoBST/DrzewoBST.cpp" />
 	 <ClCompile Include="Menu/Menu.cpp" />
 	 <ClCompile Include="Testy/TestTablicy/TestTablicy.cpp" />
 	  <ClCompile Include="Testy/TestListy/TestListy.cpp" />
 	  <ClCompile Include="Testy/TestKopca/TestKopca.cpp" />
+	  <ClCompile Include="Testy/TestDrzewaBST/TestDrzewaBST.cpp" />
 	 <ClCompile Include="Testy/Pomiar.cpp" />
   </ItemGroup>
   <ItemGroup>

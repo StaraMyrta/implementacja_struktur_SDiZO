@@ -8,6 +8,8 @@
 #include "../Testy/TestListy/TestListy.h"
 #include "../KopiecBinarny/KopiecBinarny.h"
 #include "../Testy/TestKopca/TestKopca.h"
+#include "../Drzewa/DrzewoBST/DrzewoBST.h"
+#include "../Testy/TestDrzewaBST/TestDrzewaBST.h"
 
 // Klasa dla g³ównego menu programu.
 class Menu
@@ -17,6 +19,7 @@ private:
     TablicaDynamiczna* tablica;
     ListaDwukierunkowa* lista;
     KopiecBinarny* kopiec;
+    DrzewoBST* drzewoBST;
     string wejscie;
     bool powrot = false;                        //Zmienna przechowuj¹ca informacjê o wybraniu komendy zakoñczenia programu.
     bool nieznanaKomenda = true;                //Zmienna przechowuj¹ca informacjê o nierozpoznaniu komendy programu.
@@ -51,6 +54,15 @@ private:
     void wyswietlKopiec();                      //Wyœwietlenie zawartoœci kopca binarnego.
     void testKopiec();                          //Wywo³anie testów dla kopca binarnego.
 
+    //Funkcje powi¹zane z drzewem BST
+    void menuBST();                           //Wyœwietla menu wyboru operacji na drzewie BST.
+    void wczytajPlikDoBST();                  //Wczytuje dane z pliku do drzewa BST.
+    void usunBST();                          //Wywo³anie funkcji usuniêcia wybranego elementu z drzewa BST.
+    void dodajBST();                         //Wywo³anie funkcji dodania wybranego elementu do drzewa BST.
+    void znajdzBST();                        //Wywo³anie funkcji znalezienia wybranego elementu w drzewie BST.
+    void stworzLosowoBST();                  //Wywo³anie funkcji tworzacej drzewo BST wype³niony losowymi wartoœciami o zadanym rozmiarze.
+    void wyswietlBST();                      //Wyœwietlenie zawartoœci drzewa BST.
+    void testBST();
 public:
     Menu();                                     //Konstruktor klasy menu.
     void wyborStruktury();                      //Wyœwietla menu wyboru struktury.

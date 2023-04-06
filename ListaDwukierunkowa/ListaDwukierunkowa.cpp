@@ -138,15 +138,18 @@ void ListaDwukierunkowa::usun(int indeks)
 }
 
 void ListaDwukierunkowa::usunLosowo()
-{   
-    if (rozm > 0) usun(rand() % rozm);                          //Usuniêcie losowego elementu tablicy, jeœli nie jest pusta.
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, rozm);
+    if (rozm > 0) usun(dist(gen));                          //Usuniêcie losowego elementu tablicy, jeœli nie jest pusta.
 }
 
 void ListaDwukierunkowa::zakres(int indeks)
 {
 
     if (indeks < 0 || indeks >(rozm - 1))                       //Jeœli podany indeks jest mniejszy od zera lub wiêkszy od wielkoœci listy, rzucenie wyj¹tku.
-        throw out_of_range(EXCEPTION_RANGE_DESC);
+    throw out_of_range(EXCEPTION_RANGE_DESC);
 }
 
 ElemListy* ListaDwukierunkowa::zawartoscElem(int indeks)

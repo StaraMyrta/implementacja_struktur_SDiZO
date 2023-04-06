@@ -41,7 +41,25 @@ void Menu::wyborStruktury()
             kopiec = new KopiecBinarny();
             menuKopca();
         }
-        //else if (wejscie == "4") menuBST();
+        else if (wejscie == "4") 
+        {
+            drzewoBST = new DrzewoBST();
+
+            cout << endl;                                               //Wybór operacji.
+            cout << "Menu dla drzewa BST:" << endl;
+            cout << "1. Wczytaj z pliku (1)" << endl;
+            cout << "2. Usun (2)" << endl;
+            cout << "3. Dodaj (3)" << endl;
+            cout << "4. Znajdz (4)" << endl;
+            cout << "5. Utworz losowo (5)" << endl;
+            cout << "6. Wyswietl (6)" << endl;
+            cout << "7. Testuj (7)" << endl;
+            cout << "8. Wroc (powrot)" << endl;
+            cout << "Wybierz opcje: ";
+
+            menuBST();
+        }
+
         //else if (wejscie == "5") menuCC();
 
     }
@@ -159,7 +177,10 @@ void Menu::stworzLosowoTablica()
     int rozm;
     cout << "\nPodaj wielkosc tablicy: ";
     cin >> rozm;
-    for (int i = 0; i < rozm; i++) tablica->dodaj((rand() % 4294967296));
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) tablica->dodaj(dist(gen));
     wyswietlTablica();
     menuTablicy();
 }
@@ -289,7 +310,10 @@ void Menu::stworzLosowoLista()
     int rozm;
     cout << "\nPodaj wielkosc listy: ";
     cin >> rozm;
-    for (int i = 0; i < rozm; i++) lista->dodajNaKon((rand() % 4294967296));
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) lista->dodajNaKon(dist(gen));
     wyswietlLista();
     menuListy();
 }
@@ -412,7 +436,10 @@ void Menu::stworzLosowoKopiec()
     int rozm;
     cout << "\nPodaj wielkosc kopca: ";
     cin >> rozm;
-    for (int i = 0; i < rozm; i++) kopiec->dodaj((rand() % 4294967296));
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) kopiec->dodaj(dist(gen));
     wyswietlKopiec();
     menuKopca();
 }
@@ -432,4 +459,111 @@ void Menu::testKopiec()
 
     delete test;
     menuKopca();
+}
+
+void Menu::menuBST()
+{
+    powrot = false;
+    while (!powrot)
+    {
+        cin >> wejscie;
+        if (wejscie == "1") wczytajPlikDoBST();
+        else if (wejscie == "2") usunBST();
+        else if (wejscie == "3") dodajBST();
+        else if (wejscie == "4") znajdzBST();
+        else if (wejscie == "5") stworzLosowoBST();
+        else if (wejscie == "6") wyswietlBST();
+        else if (wejscie == "7") testBST();
+        else if (wejscie == "powrot") powrot = true;
+        else cout << "Nieznane polecenie!" << endl;
+    }
+    delete drzewoBST;                                             //Po wyjœciu z pêtli tablica zostaje zdealokowana.
+    wyborStruktury();
+}
+
+void Menu::wczytajPlikDoBST() {
+
+    usunBST();
+    string nazwaPliku;
+    int licznik, elem;
+    cout << "\nPodaj nazwe pliku: ";
+    cin >> nazwaPliku;
+    ifstream plik;
+    plik.open(nazwaPliku);
+    if (plik.is_open())
+    {
+        drzewoBST = new DrzewoBST();
+        plik >> licznik;
+        for (int i = 0; i < licznik; i++)
+        {
+            plik >> elem;
+            drzewoBST->dodaj(elem);
+        }
+        wyswietlBST();
+    }
+    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
+    plik.close();
+    menuKopca();
+}
+
+void Menu::usunBST()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu do usuniecia: ";
+    cin >> elem; 
+    drzewoBST->usunKorzen();
+    wyswietlBST();
+    menuBST();
+}
+
+void Menu::dodajBST()
+{
+    int elem;
+    cout << "Podaj wartosc elementu: ";
+    cin >> elem;
+    drzewoBST->dodaj(elem);
+    wyswietlBST();
+    menuBST();
+}
+
+void Menu::znajdzBST()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu: ";
+    cin >> elem;
+    if (drzewoBST->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
+    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    menuBST();
+}
+
+void Menu::stworzLosowoBST()
+{
+    delete drzewoBST;                                               //Dealokacja listy i rezerwacja pamiêci na nowy obiekt.
+    drzewoBST = new DrzewoBST();
+    int rozm;
+    cout << "\nPodaj ilosc elementow: ";
+    cin >> rozm;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) drzewoBST->dodaj(dist(gen));
+    wyswietlBST();
+    menuBST();
+}
+
+void Menu::wyswietlBST()
+{
+    cout << endl;
+    drzewoBST->wyswietlDrzewo();
+}
+
+void Menu::testBST()
+{
+    auto* test = new TestBST();                               //Stworzenie obiektu klasy testu listy i uruchomienie metody.
+    test->sredniTestDodawania();
+    test->sredniTestUsuwania();
+    test->sredniTestSzukania();
+
+    delete test;
+    menuBST();
 }

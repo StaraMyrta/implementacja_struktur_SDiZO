@@ -9,7 +9,7 @@ class TestTablicy
 private:
     TablicaDynamiczna* tablica;                 //WskaŸnik na obiekt klasy tablicy.
     Pomiar pomiar;                              //Obiekt klasy s³u¿acej do wykonywania jednolitych pomiarów.
-    void wypelnijTablice(int rozm);             //Wype³nia tablicê losowymi liczbami z przedzia³u. [0, rozm - 1]
+    void wypelnijTablice(int rozm);             //Wype³nia tablicê losowymi liczbami.
 
     double dodajNaPoczTest(int rozm);           //Testuje wydajnoœæ dodawania elementu z przodu dla tablicy o 'rozm' elementach.
     double dodajNaKoniecTest(int rozm);         //Testuje wydajnoœæ dodawania elementu z ty³u dla tablicy o 'rozm' elementach.
