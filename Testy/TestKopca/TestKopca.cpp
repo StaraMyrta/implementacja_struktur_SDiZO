@@ -12,9 +12,12 @@ TestKopca::~TestKopca()
 
 void TestKopca::wypelnijKopiec(int rozm)
 {
-    delete kopiec;                              //Dealokacja kopca i przydzielenir pamiêci dla nowego obiektu.
+    delete kopiec;                              //Dealokacja kopca i przydzielenie pamiêci dla nowego obiektu.
     kopiec = new KopiecBinarny();
-    for (int i = 0; i < rozm; i++) kopiec->dodaj(rand() % rozm);    //Wype³nienie kopca 'rozm' liczbami z przedzia³u [0, rozm - 1] 
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) kopiec->dodaj(dist(gen));    //Wype³nienie kopca 'rozm' liczbami z przedzia³u [0, rozm - 1] 
 }
 
 void TestKopca::sredniTestDodawania()

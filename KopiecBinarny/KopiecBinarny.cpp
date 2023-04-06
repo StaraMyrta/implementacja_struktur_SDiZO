@@ -2,6 +2,10 @@
 
 KopiecBinarny::KopiecBinarny()
 {
+    cr = cl = cp = "  ";
+        cr[0] = 47;
+        cl[0] = 92;
+        cp[0] = 124;
     rozm = START_SPACE;                                 //Ustawienie rozmiaru tablicy na rozmiar początkowy.
     wierzcholki = 0;
     baza = new int[START_SPACE];
@@ -135,31 +139,26 @@ void KopiecBinarny::kopiujTablice(int* skad, int* dokad, int rozm)
     for (int i = 0; i < rozm; i++) dokad[i] = skad[i];    //Skopiowanie 'rozm' elementów z tablicy do tablicy.
 }
 
-void KopiecBinarny::wyswietlDrzewo(string sp, string sn, int wierzcholek)
-{
-    string cr, cl, cp;                                    //Stałe przechowujące specjalne zanki ascii potrzebne do wyświetlania kopca.
-    //218 = ┌   192 = └     196 = ─    179 = | 
-
-    cl[0] = 192;    cl[1] = 196;
-    cr[0] = 218;    cr[1] = 196;
-    cp[0] = 179;
-
+void KopiecBinarny::wyswietlDrzewo(string sp, string sn, int v) {
     string s;
-
-    if (wierzcholek < n)
-    {
+    if (v < rozm) {
         s = sp;
         if (sn == cr) s[s.length() - 2] = ' ';
-        wyswietlDrzewo(s + cp, cr, 2 * wierzcholek + 2);
+        wyswietlDrzewo(s + cp, cr, 2 * v + 2);
 
         s = s.substr(0, sp.length() - 2);
 
-        cout << s << sn << baza[wierzcholek] << endl;
+        cout << s << sn << baza[v] << endl;
 
         s = sp;
         if (sn == cl) s[s.length() - 2] = ' ';
-        wyswietlDrzewo(s + cp, cl, 2 * wierzcholek + 1);
+        wyswietlDrzewo(s + cp, cl, 2 * v + 1);
     }
+}
+
+void KopiecBinarny::wyswietlDrzewo()
+{
+    wyswietlDrzewo("", "", 0);
 }
 
 int KopiecBinarny::ileWierzcholkow()

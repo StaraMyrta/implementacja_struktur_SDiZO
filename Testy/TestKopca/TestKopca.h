@@ -1,5 +1,7 @@
+#pragma once
 #include "../../KopiecBinarny/KopiecBinarny.h"
 #include "../Pomiar.h"
+#include <random>
 
 class TestKopca                                 //Klasa s³u¿¹ca do testowania wydajnoœci operacji na kopcu binarnym.
 {

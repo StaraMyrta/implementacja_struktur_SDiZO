@@ -16,7 +16,10 @@ void TestTablicy::wypelnijTablice(int rozm)     //Dealokacja tablicy i przydziel
 {
     delete tablica;
     tablica = new TablicaDynamiczna();
-    for (int i = 0; i < rozm; i++) tablica->dodaj(rand() % rozm);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) tablica->dodaj(dist(gen));
 }
 
 void TestTablicy::sredniTestDodawania()

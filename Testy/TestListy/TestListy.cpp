@@ -16,7 +16,10 @@ void TestListy::wypelnijListe(int rozm)         //Dealokacja listy i przydzielen
 {
     delete lista;
     lista = new ListaDwukierunkowa();
-    for (int i = 0; i < rozm; i++) lista->dodajNaKon(rand() % rozm);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) lista->dodajNaKon(dist(gen));
 }
 
 void TestListy::sredniTestDodawania()

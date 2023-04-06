@@ -1,5 +1,7 @@
+#pragma once
 #include "../../ListaDwukierunkowa/ListaDwukierunkowa.h"
 #include "../Pomiar.h"
+#include <random>
 
 //Klasa s³u¿¹ca do testowania wydajnoœci operacji na liœcie.
 class TestListy

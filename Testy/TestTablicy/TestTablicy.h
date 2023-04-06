@@ -1,6 +1,7 @@
 #pragma once
 #include "../../TablicaDynamiczna/TablicaDynamiczna.h"
 #include "../Pomiar.h"
+#include <random>
 
 //Klasa s³u¿¹ca do testowania wydajnoœci operacji na tablicy.
 class TestTablicy

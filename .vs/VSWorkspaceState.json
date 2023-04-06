@@ -1,13 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Debug\\implemen.4ce7faed.tlog",
-    "\\kopiecBinarny",
+    "\\KopiecBinarny",
+    "\\ListaDwukierunkowa",
     "\\Menu",
     "\\TablicaDynamiczna",
     "\\Testy",
-    "\\Testy\\TestKopca"
+    "\\Testy\\TestKopca",
+    "\\Testy\\TestListy",
+    "\\Testy\\TestTablicy"
   ],
-  "SelectedNode": "\\kopiecBinarny\\KopiecBinarny.cpp",
+  "SelectedNode": "\\Menu\\Menu.cpp",
   "PreviewInSolutionExplorer": false
 }
