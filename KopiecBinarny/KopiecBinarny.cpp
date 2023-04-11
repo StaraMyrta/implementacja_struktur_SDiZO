@@ -82,13 +82,22 @@ bool KopiecBinarny::usun(int elem)
     return true;
 }
 
+bool KopiecBinarny::znajdzElem(int elem, int indeks)//Przeglądanie odbywa się zgodnie z własnościami kopca. Jeśli element zostanie znaleziony funkcja zwraca true.
+{
+    if (indeks < 0 || indeks > rozm)
+    {
+        if (elem = baza[indeks]) return true;
+        else if (elem > baza[indeks]) return false;
+        if (elem > baza[2 * indeks + 1]) return znajdzElem(elem, 2 * indeks + 2);
+
+    }
+
+    return false;
+}
+
 bool KopiecBinarny::znajdz(int elem)
 {
-    for (int i = 0; i < wierzcholki; i++)    //Cała tablica zostaje przejrzana. Jeśli element zostanie znaleziony funkcja zwraca true.
-    {
-        if (baza[i] == elem) return true;
-    }
-    return false;
+    return znajdzElem(elem, 0);
 }
 
 int KopiecBinarny::zawartosc(int indeks)

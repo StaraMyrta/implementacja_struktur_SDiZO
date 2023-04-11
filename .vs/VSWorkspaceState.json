@@ -2,8 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\Drzewa",
-    "\\Drzewa\\drzewoCzerwonoCzarne",
-    "\\KopiecBinarny",
+    "\\Drzewa\\drzewoBST",
     "\\ListaDwukierunkowa",
     "\\Menu",
     "\\Testy",
@@ -12,6 +11,6 @@
     "\\Testy\\TestListy",
     "\\Testy\\TestTablicy"
   ],
-  "SelectedNode": "\\Testy\\TestListy\\TestListy.cpp",
+  "SelectedNode": "\\Testy\\TestKopca\\TestKopca.cpp",
   "PreviewInSolutionExplorer": false
 }

@@ -29,13 +29,13 @@ void TestKopca::sredniTestDodawania()
     wyniki[3] = dodajTest(50000);
     wyniki[4] = dodajTest(100000);
     wyniki[5] = dodajTest(500000);
-    //wyniki[6] = dodajTest(1000000);
-    //wyniki[7] = dodajTest(5000000);
+    wyniki[6] = dodajTest(1000000);
+    wyniki[7] = dodajTest(5000000);
 
-    cout << "\nDodawanie dla 1000, 5000, 10000, 50000, 100000, 500000 elementow: " << endl;
+    cout << "\nDodawanie dla 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow: " << endl;
     for (double wynik : wyniki)
     {
-        cout << wynik << " us" << endl;
+        cout << wynik << endl;
     }
 }
 
@@ -48,13 +48,13 @@ void TestKopca::sredniTestUsuwania()
     wyniki[3] = usunTest(50000);
     wyniki[4] = usunTest(100000);
     wyniki[5] = usunTest(500000);
-    //wyniki[6] = usunTest(1000000);
-    //wyniki[7] = usunTest(5000000);
+    wyniki[6] = usunTest(1000000);
+    wyniki[7] = usunTest(5000000);
 
-    cout << "\nUsuwanie korzenia dla  1000, 5000, 10000, 50000, 100000, 500000 elementow:  " << endl;
+    cout << "\nUsuwanie korzenia dla  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow:  " << endl;
     for (double wynik : wyniki)
     {
-        cout << wynik << " us" << endl;
+        cout << wynik << endl;
     }
 }
 
@@ -67,19 +67,19 @@ void TestKopca::sredniTestSzukania()
     wyniki[3] = znajdzTest(50000);
     wyniki[4] = znajdzTest(100000);
     wyniki[5] = znajdzTest(500000);
-    //wyniki[6] = znajdzTest(1000000);
-    //wyniki[7] = znajdzTest(5000000);
+    wyniki[6] = znajdzTest(1000000);
+    wyniki[7] = znajdzTest(5000000);
 
-    cout << "\nWyszukiwanie dla 1000, 5000, 10000, 50000, 100000, 500000 elementow: " << endl;
+    cout << "\nWyszukiwanie dla 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow: " << endl;
     for (double wynik : wyniki)
     {
-        cout << wynik << " us" << endl;
+        cout << wynik << endl;
     }
 }
 double TestKopca::dodajTest(int rozm)
 {
     double srednia = 0;                         //Wynik to œrednia ze 100 dodañ ze zmienionym za ka¿dym razem datasetem.
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
         wypelnijKopiec(rozm);
         int elem = rand() % rozm;
@@ -88,13 +88,13 @@ double TestKopca::dodajTest(int rozm)
         pomiar.czasStop();
         srednia += pomiar.jakiCzasTrwania();
     }
-    return srednia / 10;
+    return srednia / 20;
 }
 
 double TestKopca::usunTest(int rozm)
 {
     double srednia = 0;                         //Wynik to œrednia ze 100 usuniêæ ze zmienionym za ka¿dym razem datasetem.
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
         wypelnijKopiec(rozm);
         pomiar.czasStart();
@@ -102,14 +102,14 @@ double TestKopca::usunTest(int rozm)
         pomiar.czasStop();
         srednia += pomiar.jakiCzasTrwania();
     }
-    return srednia / 10;
+    return srednia / 20;
 }
 
 double TestKopca::znajdzTest(int rozm)
 {
     //Wynik to œrednia ze 100 wyszukañ ze zmienionym za ka¿dym razem datasetem.
     double srednia = 0;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
         wypelnijKopiec(rozm);
         int elem = kopiec->zawartosc(rand() % kopiec->ileWierzcholkow());
@@ -118,5 +118,5 @@ double TestKopca::znajdzTest(int rozm)
         pomiar.czasStop();
         srednia += pomiar.jakiCzasTrwania();
     }
-    return srednia / 10;
+    return srednia / 20;
 }

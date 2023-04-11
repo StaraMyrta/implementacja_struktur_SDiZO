@@ -72,7 +72,10 @@ void ListaDwukierunkowa::dodajZa(int indeks, int elem)
 
 void ListaDwukierunkowa::dodajLosowo(int elem)
 {
-    int indeks = rand() % (rozm + 1);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, rozm);
+    int indeks = dist(gen);
     if (indeks == 0) dodajNaPocz(elem);
     else dodajZa(indeks - 1, elem);
 }

@@ -21,6 +21,7 @@ private:
     void naprawKopiecGora(int indeks, int ostatniWierzcholek);          //Naprawia strukturę kopca do korzenia.
     void naprawKopiecDol(int indeks, int ostatniWierzcholek);           //Naprawia strukturę kopca od korzenia.
     int znajdzIndeks(int elem);                                         //Znajduje indeks podanego elementu.
+    bool znajdzElem(int elem, int wierzcholek);                                              //Sprawdza czy element o podanej wartości występuje w kopcu.
     void kopiujTablice(int* skad, int* dokad, int rozm);                //Kopiuje daną ilość elementów z tablicy źródłowej do docelowej.
     void wyswietlDrzewo(string sp, string sn, int v);
 public:
@@ -29,7 +30,7 @@ public:
     void dodaj(int elem);                                               //Dodaje nowy element do kopca.
     int usunKorzen();                                                   //Usuwa korzeń kopca i naprawia go.
     bool usun(int elem);                                                //Usuwa pierwsze wystąpienie elementu w kopcu i naprawia go.
-    bool znajdz(int elem);                                              //Sprawdza czy element o podanej wartości występuje w kopcu.
+    bool znajdz(int elem);
     int zawartosc(int indeks);                                          //Zwraca element dla podanego miejsca w tablicy, zawierającej informację o drzewie.
     void wyswietlDrzewo();                                              //Wypisuje graficzną reprezentację drzewa.
     int ileWierzcholkow();                                              //Zwraca ilość wierzchołków kopca.
