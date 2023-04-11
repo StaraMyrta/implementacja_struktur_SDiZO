@@ -6,4 +6,4 @@ struct ElemBST {
     ElemBST* lewy = nullptr;
     ElemBST* prawy = nullptr;
     ElemBST* rodzic = nullptr;
-    };
+};

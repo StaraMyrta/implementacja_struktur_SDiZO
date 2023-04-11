@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Debug",
     "\\Drzewa",
-    "\\Drzewa\\drzewoBST",
-    "\\ListaDwukierunkowa",
-    "\\Menu",
+    "\\Drzewa\\DrzewoRB",
+    "\\KopiecBinarny",
+    "\\tablicaDynamiczna",
     "\\Testy",
-    "\\Testy\\TestDrzewaBST",
     "\\Testy\\TestKopca",
     "\\Testy\\TestListy",
     "\\Testy\\TestTablicy"
   ],
-  "SelectedNode": "\\Testy\\TestKopca\\TestKopca.cpp",
+  "SelectedNode": "\\Debug\\ElemBST.obj",
   "PreviewInSolutionExplorer": false
 }

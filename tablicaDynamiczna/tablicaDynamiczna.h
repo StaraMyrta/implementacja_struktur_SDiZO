@@ -1,6 +1,9 @@
 #pragma once
+#include <random>
 #include <iostream>
 #include <string>
+
+using namespace std;
 
 class TablicaDynamiczna {
 private:

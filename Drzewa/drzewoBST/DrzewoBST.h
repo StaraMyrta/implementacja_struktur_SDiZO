@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <random>
 #include "ElemBST.h"
 
 using namespace std;
@@ -9,8 +10,10 @@ class DrzewoBST {
 private:
     string cr, cl, cp;
     ElemBST* korzen = nullptr;
-    bool zawartoscElem(int wartosc, ElemBST* elemBiezacy);
-    int n = 0;
+    ElemBST* zawartoscElem(int wartosc, ElemBST* elemBiezacy);
+    ElemBST* znajdzNastepnika(ElemBST* poprzednik);
+    void usun(ElemBST* elemBiezacy, int wartosc);
+    int rozm = 0;
 
     void dodajWMiejsce(ElemBST* wskaznik, int wartosc);
     void listaLiniowa();
@@ -29,6 +32,7 @@ public:
     ElemBST* zawartosc(int wartosc);
     void wyswietlDrzewo();
     void usunDrzewo();
-    void usunKorzen();
+    void usun(int wartosc);
+    void usunLosowo();
 };
 

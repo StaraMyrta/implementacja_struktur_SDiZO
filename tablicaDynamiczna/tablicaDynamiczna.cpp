@@ -117,7 +117,10 @@ void TablicaDynamiczna::usun(int indeks) {
 
 void TablicaDynamiczna::usunLosowo()
 {
-    if (rozm > 0) usun(rand() % rozm);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, rozm);
+    if (rozm > 0) usun(dist(gen));
 }
 
 int TablicaDynamiczna::rozmiar()

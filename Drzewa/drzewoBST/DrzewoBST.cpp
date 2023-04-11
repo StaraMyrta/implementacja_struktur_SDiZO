@@ -19,20 +19,20 @@ DrzewoBST::~DrzewoBST()
 
 void DrzewoBST::dodaj(int wartosc) {
 
-    n++;
+    rozm++;
     if (korzen == nullptr)
         korzen = new ElemBST(wartosc);
     else
         dodajWMiejsce(korzen, wartosc);
 }
 
-bool DrzewoBST::zawartoscElem(int wartosc,ElemBST* elemBiezacy)
+ElemBST* DrzewoBST::zawartoscElem(int wartosc,ElemBST* elemBiezacy)
 {
     if (elemBiezacy != nullptr)
     {
         if (wartosc == elemBiezacy->number)
         {
-            return true;
+            return elemBiezacy;
         }
         else if (wartosc < elemBiezacy->number)
         {
@@ -43,7 +43,7 @@ bool DrzewoBST::zawartoscElem(int wartosc,ElemBST* elemBiezacy)
             return zawartoscElem(wartosc, elemBiezacy->prawy);
         }
     }
-    return false;
+    return elemBiezacy;
 }
 
 //dodawnie na glebszych poziomach elementow do drzewa
@@ -124,11 +124,11 @@ void DrzewoBST::RotacjaWLewo(ElemBST* wskaznik) {
 //rownowazenie drzewa
 void DrzewoBST::zbalansujDrzewo() {
 
-    if (n > 0) {
+    if (rozm > 0) {
         listaLiniowa();                                         //tworzymy liste liniowa
 
-        int ileRotacji = (int)(pow(2, (int)(log2(n + 1))) - 1); //obliczamy ilosc rotacji
-        rotujNRazy(n - ileRotacji);
+        int ileRotacji = (int)(pow(2, (int)(log2(rozm + 1))) - 1); //obliczamy ilosc rotacji
+        rotujNRazy(rozm - ileRotacji);
 
         while (ileRotacji > 1) {                                  //obracamy okreslona ilosc wezlow
             ileRotacji = (int)(ileRotacji / 2);
@@ -226,60 +226,104 @@ void DrzewoBST::wyswietlDrzewo()
     wyswietlDrzewo("", "", korzen);
 }
 
-//usuwanie wezla z drzewa
-void DrzewoBST::usunKorzen() 
+
+ElemBST* DrzewoBST::znajdzNastepnika(ElemBST* poprzednik)
 {
-
-    if (korzen != nullptr) 
+    ElemBST* elemRoboczy = poprzednik->prawy;
+    if (elemRoboczy != nullptr)
     {
-        n--;
-        //usuwanie korzenia, który jest jedynym elementem drzewa
-        if (korzen->lewy == nullptr && korzen->prawy == nullptr) 
+        while (elemRoboczy->lewy != nullptr)
         {
-            korzen = nullptr;
+            elemRoboczy = elemRoboczy->lewy;
         }
-        //usuwanie korzenia, który ma tylko prawego syna
-        else if (korzen->lewy == nullptr) 
-        {
-            korzen->prawy->rodzic = nullptr;
-            korzen = korzen->prawy;
-            //usuwanie korzen, który ma tylko lewego syna
-        }
-        else if (korzen->prawy == nullptr) 
-        {
-            korzen->lewy->rodzic = nullptr;
-            korzen = korzen->lewy;
-        }
+        return elemRoboczy;
+    }
+    elemRoboczy = poprzednik->rodzic;
+    while (elemRoboczy != nullptr && elemRoboczy->lewy != poprzednik)
+    {
+        poprzednik = elemRoboczy;
+        elemRoboczy = elemRoboczy->rodzic;
+    }
+    return elemRoboczy;
+}
 
-            //usuwanie korzen, który ma dwóch synów
+
+void DrzewoBST::usun(ElemBST* elemBiezacy, int number) {
+    if (elemBiezacy == nullptr) {
+        return;
+    }
+
+    if (number < elemBiezacy->number) {
+        usun(elemBiezacy->lewy, number);
+    }
+    else if (number > elemBiezacy->number) {
+        usun(elemBiezacy->prawy, number);
+    }
+    else {
+        if (elemBiezacy->lewy == nullptr && elemBiezacy->prawy == nullptr) {
+            // Wezel bez dzieci
+            if (elemBiezacy->rodzic != nullptr) {
+                if (elemBiezacy == elemBiezacy->rodzic->lewy) {
+                    elemBiezacy->rodzic->lewy = nullptr;
+                }
+                else {
+                    elemBiezacy->rodzic->prawy = nullptr;
+                }
+            }
+            delete elemBiezacy;
+            elemBiezacy = nullptr;
+        }
+        else if (elemBiezacy->lewy == nullptr) {
+            // Wezel ma tylko prawe dziecko
+            if (elemBiezacy->rodzic != nullptr) {
+                if (elemBiezacy == elemBiezacy->rodzic->lewy) {
+                    elemBiezacy->rodzic->lewy = elemBiezacy->prawy;
+                }
+                else {
+                    elemBiezacy->rodzic->prawy = elemBiezacy->prawy;
+                }
+            }
+            elemBiezacy->prawy->rodzic = elemBiezacy->rodzic;
+            delete elemBiezacy;
+            elemBiezacy = nullptr;
+        }
+        else if (elemBiezacy->prawy == nullptr) {
+            // Wezel ma tylko lewe dziecko
+            if (elemBiezacy->rodzic != nullptr) {
+                if (elemBiezacy == elemBiezacy->rodzic->lewy) {
+                    elemBiezacy->rodzic->lewy = elemBiezacy->lewy;
+                }
+                else {
+                    elemBiezacy->rodzic->prawy = elemBiezacy->lewy;
+                }
+            }
+            elemBiezacy->lewy->rodzic = elemBiezacy->rodzic;
+            delete elemBiezacy;
+            elemBiezacy = nullptr;
+        }
         else {
-            ElemBST* secondPointer = korzen->prawy;
-            while (secondPointer->lewy != nullptr) 
-            {
-                secondPointer = secondPointer->lewy;
+            // Wezel ma dwoje dzieci
+            ElemBST* nastepnik = elemBiezacy->prawy;
+            while (nastepnik->lewy != nullptr) {
+                nastepnik = nastepnik->lewy;
             }
-            if (korzen->prawy == secondPointer) 
-            {
-                korzen->prawy = secondPointer->prawy;
-                if (secondPointer->prawy != nullptr)     secondPointer->prawy->rodzic = korzen;
-            }
-            else {
-                if (secondPointer->prawy == nullptr) 
-                {
-                    secondPointer->rodzic->lewy = nullptr;
-                }
-                else 
-                {
-                    secondPointer->prawy->rodzic = secondPointer->rodzic;
-                    secondPointer->rodzic->lewy = secondPointer->prawy;
-                }
-            }
-            korzen->number = secondPointer->number;
-
-            delete secondPointer;
+            elemBiezacy->number = nastepnik->number;
+            usun(elemBiezacy->prawy, nastepnik->number);
         }
     }
-    else cout << "Brak elementu do usuniecia" << endl;
+}
+
+void DrzewoBST::usun(int wartosc)
+{
+    usun(korzen, wartosc);
+}
+
+void DrzewoBST::usunLosowo()
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, rozm);
+    usun(dist(gen));
 }
 
 //usuwanie calego drzewa
@@ -291,7 +335,7 @@ void DrzewoBST::usunDrzewo(ElemBST* wskaznik) {
         delete wskaznik;
     }
     korzen = nullptr;
-    n = 0;
+    rozm = 0;
 }
 
 //wywolanie metody usuwania drzewa z parametrem

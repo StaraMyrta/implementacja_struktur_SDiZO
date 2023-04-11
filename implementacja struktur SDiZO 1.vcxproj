@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
 	  <ClCompile Include="ListaDwukierunkowa/ElemListy.h" />
+	  <ClCompile Include="Drzewa/DrzewoBST/ElemBST.h" />
 
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -98,7 +98,7 @@ double TestBST::usunTest(int rozm)
     {
         wypelnijDrzewo(rozm);
         pomiar.czasStart();
-        drzewo->usunKorzen();
+        drzewo->usunLosowo();
         pomiar.czasStop();
         srednia += pomiar.jakiCzasTrwania();
     }

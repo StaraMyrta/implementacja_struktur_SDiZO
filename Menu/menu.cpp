@@ -511,7 +511,7 @@ void Menu::usunBST()
     int elem;
     cout << "\nPodaj wartosc elementu do usuniecia: ";
     cin >> elem; 
-    drzewoBST->usunKorzen();
+    drzewoBST->usun(elem);
     wyswietlBST();
     menuBST();
 }
