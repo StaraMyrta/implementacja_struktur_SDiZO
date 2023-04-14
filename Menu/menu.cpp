@@ -60,8 +60,22 @@ void Menu::wyborStruktury()
             menuBST();
         }
 
-        //else if (wejscie == "5") menuCC();
+        else if (wejscie == "5")
+        {
+            cout << endl;                                               //Wybór operacji.
+            cout << "Menu dla drzewa BST:" << endl;
+            cout << "1. Wczytaj z pliku (1)" << endl;
+            cout << "2. Usun (2)" << endl;
+            cout << "3. Dodaj (3)" << endl;
+            cout << "4. Znajdz (4)" << endl;
+            cout << "5. Utworz losowo (5)" << endl;
+            cout << "6. Wyswietl (6)" << endl;
+            cout << "7. Testuj (7)" << endl;
+            cout << "8. Wroc (powrot)" << endl;
+            cout << "Wybierz opcje: ";
 
+            menuRB();
+        }
     }
 }
 
@@ -566,4 +580,111 @@ void Menu::testBST()
 
     delete test;
     menuBST();
+}
+
+void Menu::menuRB()
+{
+    powrot = false;
+    while (!powrot)
+    {
+        cin >> wejscie;
+        if (wejscie == "1") wczytajPlikDoRB();
+        else if (wejscie == "2") usunRB();
+        else if (wejscie == "3") dodajRB();
+        else if (wejscie == "4") znajdzRB();
+        else if (wejscie == "5") stworzLosowoRB();
+        else if (wejscie == "6") wyswietlRB();
+        else if (wejscie == "7") testRB();
+        else if (wejscie == "powrot") powrot = true;
+        else cout << "Nieznane polecenie!" << endl;
+    }
+    delete drzewoRB;                                             //Po wyjœciu z pêtli tablica zostaje zdealokowana.
+    wyborStruktury();
+}
+
+void Menu::wczytajPlikDoRB() {
+
+    usunRB();
+    string nazwaPliku;
+    int licznik, elem;
+    cout << "\nPodaj nazwe pliku: ";
+    cin >> nazwaPliku;
+    ifstream plik;
+    plik.open(nazwaPliku);
+    if (plik.is_open())
+    {
+        drzewoRB = new DrzewoRB();
+        plik >> licznik;
+        for (int i = 0; i < licznik; i++)
+        {
+            plik >> elem;
+            drzewoRB->dodaj(elem);
+        }
+        wyswietlRB();
+    }
+    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
+    plik.close();
+    menuKopca();
+}
+
+void Menu::usunRB()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu do usuniecia: ";
+    cin >> elem;
+    drzewoRB->usun(elem);
+    wyswietlRB();
+    menuRB();
+}
+
+void Menu::dodajRB()
+{
+    int elem;
+    cout << "Podaj wartosc elementu: ";
+    cin >> elem;
+    drzewoRB->dodaj(elem);
+    wyswietlRB();
+    menuRB();
+}
+
+void Menu::znajdzRB()
+{
+    int elem;
+    cout << "\nPodaj wartosc elementu: ";
+    cin >> elem;
+    if (drzewoRB->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
+    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    menuRB();
+}
+
+void Menu::stworzLosowoRB()
+{
+    delete drzewoRB;                                               //Dealokacja listy i rezerwacja pamiêci na nowy obiekt.
+    drzewoRB = new DrzewoRB();
+    int rozm;
+    cout << "\nPodaj ilosc elementow: ";
+    cin >> rozm;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 1000000);
+    for (int i = 0; i < rozm; i++) drzewoRB->dodaj(dist(gen));
+    wyswietlRB();
+    menuRB();
+}
+
+void Menu::wyswietlRB()
+{
+    cout << "\n0 - wezel czerwony, 1- wezel czarny\n\n";;
+    drzewoRB->wyswietlDrzewo();
+}
+
+void Menu::testRB()
+{
+    auto* test = new TestRB();                               //Stworzenie obiektu klasy testu listy i uruchomienie metody.
+    test->sredniTestDodawania();
+    test->sredniTestUsuwania();
+    test->sredniTestSzukania();
+
+    delete test;
+    menuRB();
 }

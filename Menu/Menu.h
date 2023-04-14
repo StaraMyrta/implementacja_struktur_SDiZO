@@ -10,6 +10,8 @@
 #include "../Testy/TestKopca/TestKopca.h"
 #include "../Drzewa/DrzewoBST/DrzewoBST.h"
 #include "../Testy/TestDrzewaBST/TestDrzewaBST.h"
+#include "../Drzewa/DrzewoRB/DrzewoRB.h"
+#include "../Testy/TestDrzewaRB/TestDrzewaRB.h"
 
 // Klasa dla g³ównego menu programu.
 class Menu
@@ -20,6 +22,7 @@ private:
     ListaDwukierunkowa* lista;
     KopiecBinarny* kopiec;
     DrzewoBST* drzewoBST;
+    DrzewoRB* drzewoRB;
     string wejscie;
     bool powrot = false;                        //Zmienna przechowuj¹ca informacjê o wybraniu komendy zakoñczenia programu.
     bool nieznanaKomenda = true;                //Zmienna przechowuj¹ca informacjê o nierozpoznaniu komendy programu.
@@ -63,6 +66,17 @@ private:
     void stworzLosowoBST();                  //Wywo³anie funkcji tworzacej drzewo BST wype³niony losowymi wartoœciami o zadanym rozmiarze.
     void wyswietlBST();                      //Wyœwietlenie zawartoœci drzewa BST.
     void testBST();
+
+    //Funkcje powi¹zane z drzewem RB
+    void menuRB();                           //Wyœwietla menu wyboru operacji na drzewie RB.
+    void wczytajPlikDoRB();                  //Wczytuje dane z pliku do drzewa RB.
+    void usunRB();                          //Wywo³anie funkcji usuniêcia wybranego elementu z drzewa RB.
+    void dodajRB();                         //Wywo³anie funkcji dodania wybranego elementu do drzewa RB.
+    void znajdzRB();                        //Wywo³anie funkcji znalezienia wybranego elementu w drzewie RB.
+    void stworzLosowoRB();                  //Wywo³anie funkcji tworzacej drzewo RB wype³niony losowymi wartoœciami o zadanym rozmiarze.
+    void wyswietlRB();                      //Wyœwietlenie zawartoœci drzewa RB.
+    void testRB();
+
 public:
     Menu();                                     //Konstruktor klasy menu.
     void wyborStruktury();                      //Wyœwietla menu wyboru struktury.

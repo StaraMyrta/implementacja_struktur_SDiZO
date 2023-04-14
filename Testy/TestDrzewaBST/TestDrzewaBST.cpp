@@ -1,5 +1,7 @@
 #include "TestDrzewaBST.h"
 
+using namespace std;
+
 TestBST::TestBST()
 {
     drzewo = new DrzewoBST();
@@ -42,14 +44,14 @@ void TestBST::sredniTestDodawania()
 void TestBST::sredniTestUsuwania()
 {
     double wyniki[8];                           //Testy usuwania elementów dla ró¿nych wielkoœci struktury.
-    //wyniki[0] = usunTest(1000);
-    //wyniki[1] = usunTest(5000);
-    //wyniki[2] = usunTest(10000);
-    //wyniki[3] = usunTest(50000);
-    //wyniki[4] = usunTest(100000);
-    //wyniki[5] = usunTest(500000);
-    //wyniki[6] = usunTest(1000000);
-    //wyniki[7] = usunTest(5000000);
+    wyniki[0] = usunTest(1000);
+    wyniki[1] = usunTest(5000);
+    wyniki[2] = usunTest(10000);
+    wyniki[3] = usunTest(50000);
+    wyniki[4] = usunTest(100000);
+    wyniki[5] = usunTest(500000);
+    wyniki[6] = usunTest(1000000);
+    wyniki[7] = usunTest(5000000);
 
     cout << "\nUsuwanie korzenia dla  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow:  " << endl;
     for (double wynik : wyniki)

@@ -1,24 +1,40 @@
+#pragma once
+#include <stdlib.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <windows.h>
+#include <chrono>
+
 #include "ElemRB.h"
+using namespace std;
+
+
 class DrzewoRB
 {
 private:
-    string cr, cl, cp;
-	ElemRB* korzen = nullptr;
+	void wyswietlDrzewo(string sp, string sn, ElemRB* p);
+
 public:
-	int rozm;
 	DrzewoRB();
 	~DrzewoRB();
-	// member methods declaration
-	void deleteTree(ElemRB* node);
-	void buildRandomly(int enteredAmount);
-	void buildFromFile();
-	bool findKey(int enteredValue);
-	ElemRB* returnSuccesor(ElemRB* node);
-	void addNode(int enteredValue);
-	void deleteNode(int searchedKey);
-	void treeAddFix(ElemRB* node);
-	void leftRotation(ElemRB* node);
-	void rightRotation(ElemRB* node);
-	void printTree(string text1, string text2, ElemRB* node);
-	void display();
+	
+	ElemRB straznik;
+	ElemRB* korzen;
+
+	string cr, cl, cp;
+	int rozm;
+	int number;
+
+	void dodaj(int number);
+	void usun(int number);
+	int znajdz(int number);
+	void wyswietlDrzewo();
+	void rotacjaWLewo(ElemRB* wezel);
+	void rotacjaWPrawo(ElemRB* wezel);
+	ElemRB* nastepnik(ElemRB* p);
+	ElemRB* minimum(ElemRB* p);
+	void naprawDrzewo(ElemRB* wezel);
+	void usunKorzen();
 };

@@ -307,8 +307,30 @@ void DrzewoBST::usun(ElemBST* elemBiezacy, int number) {
             while (nastepnik->lewy != nullptr) {
                 nastepnik = nastepnik->lewy;
             }
-            elemBiezacy->number = nastepnik->number;
-            usun(elemBiezacy->prawy, nastepnik->number);
+            // Przypisanie odpowiednio potomków nastêpnikowi
+            nastepnik->lewy = elemBiezacy->lewy;
+            if(nastepnik->prawy != nullptr)     //zpisanie prawego potomka nastepnika jako lewego potomka rodzica nastepnika.
+            {
+                nastepnik->prawy->rodzic = nastepnik->rodzic;
+                nastepnik->rodzic->lewy = nastepnik->prawy;
+
+            } 
+            nastepnik->prawy = elemBiezacy->prawy;
+            // Przypisanie odpowiednio wskaŸnika rodzica elementu usuwanego na nastepnika i rodzica nastepnika na rodzica elementu usuwanego.
+            if (elemBiezacy == elemBiezacy->rodzic->lewy) {
+                elemBiezacy->rodzic->lewy = nastepnik;
+            }
+            else {
+                elemBiezacy->rodzic->prawy = nastepnik;
+            }
+            // Przypisanie lewemu potomkowi elementu usuwanego (jeœli taki istnieje) nastêpnika jako rodzica.
+            if(elemBiezacy->lewy != nullptr) elemBiezacy->lewy->rodzic = nastepnik;
+
+            if (nastepnik != elemBiezacy->prawy) elemBiezacy->prawy->rodzic = nastepnik;
+            
+            nastepnik->rodzic = elemBiezacy->rodzic;
+
+            delete elemBiezacy;
         }
     }
 }
@@ -330,8 +352,8 @@ void DrzewoBST::usunLosowo()
 void DrzewoBST::usunDrzewo(ElemBST* wskaznik) {
 
     if (wskaznik) {
-        usunDrzewo(wskaznik->lewy);
-        usunDrzewo(wskaznik->prawy);
+        if (wskaznik->lewy)usunDrzewo(wskaznik->lewy);
+        if (wskaznik->prawy)usunDrzewo(wskaznik->prawy);
         delete wskaznik;
     }
     korzen = nullptr;

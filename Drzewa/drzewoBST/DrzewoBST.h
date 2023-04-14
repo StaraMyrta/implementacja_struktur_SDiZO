@@ -9,17 +9,16 @@ using namespace std;
 class DrzewoBST {
 private:
     string cr, cl, cp;
+    int rozm = 0;
     ElemBST* korzen = nullptr;
     ElemBST* zawartoscElem(int wartosc, ElemBST* elemBiezacy);
     ElemBST* znajdzNastepnika(ElemBST* poprzednik);
     void usun(ElemBST* elemBiezacy, int wartosc);
-    int rozm = 0;
 
     void dodajWMiejsce(ElemBST* wskaznik, int wartosc);
     void listaLiniowa();
     void rotujNRazy(int ileRotacji);
     void wyswietlDrzewo(string sp, string sn, ElemBST* v);
-    void usunDrzewo(ElemBST* wskaznik);
 
 public:
     DrzewoBST();
@@ -31,6 +30,7 @@ public:
     bool znajdz(int wartosc);
     ElemBST* zawartosc(int wartosc);
     void wyswietlDrzewo();
+    void usunDrzewo(ElemBST* wskaznik);
     void usunDrzewo();
     void usun(int wartosc);
     void usunLosowo();
