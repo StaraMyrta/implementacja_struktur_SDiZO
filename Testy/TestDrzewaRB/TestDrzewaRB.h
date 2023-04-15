@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Drzewa/DrzewoRB/DrzewoRB.h"
+#include "../../DrzewoRB/DrzewoRB.h"
 #include "../Pomiar.h"
 #include <random>
 
