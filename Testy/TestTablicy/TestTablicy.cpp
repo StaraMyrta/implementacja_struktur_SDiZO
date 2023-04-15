@@ -65,22 +65,22 @@ void TestTablicy::sredniTestUsuwania()
     wyniki[0][1] = usunNaPoczTest(5000);
     wyniki[0][2] = usunNaPoczTest(10000);
     wyniki[0][3] = usunNaPoczTest(50000);
-    wyniki[0][4] = usunNaPoczTest(100000);
-    wyniki[0][5] = usunNaPoczTest(500000);
+    //wyniki[0][4] = usunNaPoczTest(100000);
+    //wyniki[0][5] = usunNaPoczTest(500000);
 
     wyniki[1][0] = usunNaKonTest(1000);         //Testy usuwania elementów z ty³u tablicy.
     wyniki[1][1] = usunNaKonTest(5000);
     wyniki[1][2] = usunNaKonTest(10000);
     wyniki[1][3] = usunNaKonTest(50000);
-    wyniki[1][4] = usunNaKonTest(100000);
-    wyniki[1][5] = usunNaKonTest(500000);
+    //wyniki[1][4] = usunNaKonTest(100000);
+    //wyniki[1][5] = usunNaKonTest(500000);
 
     wyniki[2][0] = usunLosowoTest(1000);         //Testy usuwania elementów z losowego miejsca tablicy.
     wyniki[2][1] = usunLosowoTest(5000);
     wyniki[2][2] = usunLosowoTest(10000);
     wyniki[2][3] = usunLosowoTest(50000);
-    wyniki[2][4] = usunLosowoTest(100000);
-    wyniki[2][5] = usunLosowoTest(500000);
+    //wyniki[2][4] = usunLosowoTest(100000);
+    //wyniki[2][5] = usunLosowoTest(500000);
 
     cout << "Usuwanie z pocz¹tku/koñca/losowo dla 1000, 5000, 10000, 50000, 100000, 500000 elementow: " << endl;
     for (auto& wynik : wyniki)
@@ -98,9 +98,9 @@ void TestTablicy::sredniTestSzukania()
     wyniki[1] = znajdzTest(5000);
     wyniki[2] = znajdzTest(10000);
     wyniki[3] = znajdzTest(50000);
-    wyniki[4] = znajdzTest(100000);
-    wyniki[5] = znajdzTest(500000);
-    wyniki[6] = znajdzTest(1000000);
+    //wyniki[4] = znajdzTest(100000);
+    //wyniki[5] = znajdzTest(500000);
+    //wyniki[6] = znajdzTest(1000000);
 
     cout << "Wyszukiwanie dla  1000, 5000, 10000, 50000, 100000, 500000, 1000000 elementow: " << endl;
     for (double wynik : wyniki)

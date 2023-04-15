@@ -6,9 +6,8 @@ KopiecBinarny::KopiecBinarny()
         cr[0] = 47;
         cl[0] = 92;
         cp[0] = 124;
-    rozm = START_SPACE;                                 //Ustawienie rozmiaru tablicy na rozmiar początkowy.
+        rozm = 0;
     wierzcholki = 0;
-    baza = new int[START_SPACE];
 }
 
 KopiecBinarny::~KopiecBinarny()
@@ -34,8 +33,11 @@ void KopiecBinarny::dodaj(int elem)
     naprawKopiecGora(indeks, elem);
 }
 
-int KopiecBinarny::usunKorzen()
+void KopiecBinarny::usunKorzen()
 {
+    if (rozm == 1) delete[] baza;
+    rozm--;
+    wierzcholki--;
     if (wierzcholki == 0) throw std::length_error(EXCEPTION_LENGTH_DESC);    //Jeśli kopiec jest pusty rzucony zostaje wyjątek.
     if (rozm - wierzcholki > MAX_FREE_SPACE)            //Jeśli rozmiar tablicy jest większy niż maksymalny, zostaje zmniejszona.
     {
@@ -47,11 +49,9 @@ int KopiecBinarny::usunKorzen()
         kopiujTablice(tablicaRobocza, baza, wierzcholki);
         delete[] tablicaRobocza;
     }
-    wierzcholki--;
     int ostatniWierzcholek = baza[wierzcholki];                 //Zapamiętany zostaje indeks ostatniego wierzchołka oraz wartość korzenia.
     int wartoscKorzenia = baza[0];
     naprawKopiecDol(0, ostatniWierzcholek);
-    return wartoscKorzenia;
 }
 
 bool KopiecBinarny::usun(int elem)
@@ -82,22 +82,23 @@ bool KopiecBinarny::usun(int elem)
     return true;
 }
 
-bool KopiecBinarny::znajdzElem(int elem, int indeks)//Przeglądanie odbywa się zgodnie z własnościami kopca. Jeśli element zostanie znaleziony funkcja zwraca true.
+bool KopiecBinarny::znajdz(int elem, int indeks)//Przeglądanie odbywa się zgodnie z własnościami kopca. Jeśli element zostanie znaleziony funkcja zwraca true.
 {
-    if (indeks < 0 || indeks > rozm)
-    {
-        if (elem = baza[indeks]) return true;
-        else if (elem > baza[indeks]) return false;
-        if (elem > baza[2 * indeks + 1]) return znajdzElem(elem, 2 * indeks + 2);
-
-    }
-
     return false;
 }
 
 bool KopiecBinarny::znajdz(int elem)
 {
-    return znajdzElem(elem, 0);
+    if (baza[0] < elem) return false;          //Jeśli poszukiwany element jest większy od korzenia wiadome jest, że nie istnieje w kopcu.
+    else if (baza[0] == elem) return true;
+    int i = 0;
+    while (2 * i + 1 < rozm - 1)
+    {
+        if (baza[2 * i + 1] < elem && baza[2 * i + 2] < elem) return false;
+        else if (baza[2 * i + 1] == elem || baza[2 * i + 2] == elem) return true;
+        else i++;
+    }
+    return false;
 }
 
 int KopiecBinarny::zawartosc(int indeks)
@@ -150,7 +151,8 @@ void KopiecBinarny::kopiujTablice(int* skad, int* dokad, int rozm)
 
 void KopiecBinarny::wyswietlDrzewo(string sp, string sn, int v) {
     string s;
-    if (v < rozm) {
+    if (v < wierzcholki) 
+    {
         s = sp;
         if (sn == cr) s[s.length() - 2] = ' ';
         wyswietlDrzewo(s + cp, cr, 2 * v + 2);

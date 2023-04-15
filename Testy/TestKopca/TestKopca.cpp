@@ -23,14 +23,14 @@ void TestKopca::wypelnijKopiec(int rozm)
 void TestKopca::sredniTestDodawania()
 {
     double wyniki[10];                           //Testy dodawania elementów dla ró¿nych wielkoœci struktury.
-    wyniki[0] = dodajTest(1000);
-    wyniki[1] = dodajTest(5000);
-    wyniki[2] = dodajTest(10000);
-    wyniki[3] = dodajTest(50000);
-    wyniki[4] = dodajTest(100000);
-    wyniki[5] = dodajTest(500000);
-    wyniki[6] = dodajTest(1000000);
-    wyniki[7] = dodajTest(5000000);
+    //wyniki[0] = dodajTest(1000);
+    //wyniki[1] = dodajTest(5000);
+    //wyniki[2] = dodajTest(10000);
+    //wyniki[3] = dodajTest(50000);
+    //wyniki[4] = dodajTest(100000);
+    //wyniki[5] = dodajTest(500000);
+    //wyniki[6] = dodajTest(1000000);
+    //wyniki[7] = dodajTest(5000000);
 
     cout << "\nDodawanie dla 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow: " << endl;
     for (double wynik : wyniki)
@@ -42,14 +42,14 @@ void TestKopca::sredniTestDodawania()
 void TestKopca::sredniTestUsuwania()
 {
     double wyniki[10];                           //Testy usuwania elementów dla ró¿nych wielkoœci struktury.
-    wyniki[0] = usunTest(1000);
-    wyniki[1] = usunTest(5000);
-    wyniki[2] = usunTest(10000);
-    wyniki[3] = usunTest(50000);
-    wyniki[4] = usunTest(100000);
-    wyniki[5] = usunTest(500000);
-    wyniki[6] = usunTest(1000000);
-    wyniki[7] = usunTest(5000000);
+    //wyniki[0] = usunTest(1000);
+    //wyniki[1] = usunTest(5000);
+    //wyniki[2] = usunTest(10000);
+    //wyniki[3] = usunTest(50000);
+    //wyniki[4] = usunTest(100000);
+    //wyniki[5] = usunTest(500000);
+    //wyniki[6] = usunTest(1000000);
+    //wyniki[7] = usunTest(5000000);
 
     cout << "\nUsuwanie korzenia dla  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow:  " << endl;
     for (double wynik : wyniki)
@@ -61,14 +61,14 @@ void TestKopca::sredniTestUsuwania()
 void TestKopca::sredniTestSzukania()
 {
     double wyniki[10];                           //Testy wyszukiwania elementów dla ró¿nych wielkoœci struktury.
-    wyniki[0] = znajdzTest(1000);
-    wyniki[1] = znajdzTest(5000);
-    wyniki[2] = znajdzTest(10000);
-    wyniki[3] = znajdzTest(50000);
-    wyniki[4] = znajdzTest(100000);
+    //wyniki[0] = znajdzTest(1000);
+    //wyniki[1] = znajdzTest(5000);
+    //wyniki[2] = znajdzTest(10000);
+    //wyniki[3] = znajdzTest(50000);
+    //wyniki[4] = znajdzTest(100000);
     wyniki[5] = znajdzTest(500000);
-    wyniki[6] = znajdzTest(1000000);
-    wyniki[7] = znajdzTest(5000000);
+    //wyniki[6] = znajdzTest(1000000);
+    //wyniki[7] = znajdzTest(5000000);
 
     cout << "\nWyszukiwanie dla 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow: " << endl;
     for (double wynik : wyniki)

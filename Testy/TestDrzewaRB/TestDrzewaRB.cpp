@@ -25,14 +25,14 @@ void TestRB::wypelnijDrzewo(int rozm)
 void TestRB::sredniTestDodawania()
 {
     double wyniki[8];                           //Testy dodawania elementów dla ró¿nych wielkoœci struktury.
-    wyniki[0] = dodajTest(100);
-    wyniki[1] = dodajTest(200);
-    wyniki[2] = dodajTest(400);
-    wyniki[3] = dodajTest(800);
-    wyniki[4] = dodajTest(1600);
-    wyniki[5] = dodajTest(3200);
-    wyniki[6] = dodajTest(6400);
-    wyniki[7] = dodajTest(12800);
+    //wyniki[0] = dodajTest(100);
+    //wyniki[1] = dodajTest(200);
+    //wyniki[2] = dodajTest(400);
+    //wyniki[3] = dodajTest(800);
+    //wyniki[4] = dodajTest(1600);
+    //wyniki[5] = dodajTest(3200);
+    //wyniki[6] = dodajTest(6400);
+    //wyniki[7] = dodajTest(12800);
 
     cout << "\nDodawanie dla 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 elementow: " << endl;
     for (double wynik : wyniki)
@@ -44,11 +44,11 @@ void TestRB::sredniTestDodawania()
 void TestRB::sredniTestUsuwania()
 {
     double wyniki[8];                           //Testy usuwania elementów dla ró¿nych wielkoœci struktury.
-    //wyniki[0] = usunTest(1000);
-    //wyniki[1] = usunTest(5000);
-    //wyniki[2] = usunTest(10000);
-    //wyniki[3] = usunTest(50000);
-    //wyniki[4] = usunTest(100000);
+    wyniki[0] = usunTest(1000);
+    wyniki[1] = usunTest(5000);
+    wyniki[2] = usunTest(10000);
+    wyniki[3] = usunTest(50000);
+    wyniki[4] = usunTest(100000);
     //wyniki[5] = usunTest(500000);
     //wyniki[6] = usunTest(1000000);
     //wyniki[7] = usunTest(5000000);
@@ -63,10 +63,10 @@ void TestRB::sredniTestUsuwania()
 void TestRB::sredniTestSzukania()
 {
     double wyniki[8];                           //Testy wyszukiwania elementów dla ró¿nych wielkoœci struktury.
-    //wyniki[0] = znajdzTest(1000);
-    //wyniki[1] = znajdzTest(5000);
-    //wyniki[2] = znajdzTest(10000);
-    //wyniki[3] = znajdzTest(50000);
+    wyniki[0] = znajdzTest(1000);
+    wyniki[1] = znajdzTest(5000);
+    wyniki[2] = znajdzTest(10000);
+    wyniki[3] = znajdzTest(50000);
     //wyniki[4] = znajdzTest(100000);
     //wyniki[5] = znajdzTest(500000);
     //wyniki[6] = znajdzTest(1000000);

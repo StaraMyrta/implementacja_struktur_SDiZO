@@ -29,7 +29,7 @@ public:
 
 	void dodaj(int number);
 	void usun(int number);
-	int znajdz(int number);
+	bool znajdz(int number);
 	void wyswietlDrzewo();
 	void rotacjaWLewo(ElemRB* wezel);
 	void rotacjaWPrawo(ElemRB* wezel);

@@ -12,9 +12,8 @@ void Menu::wyborStruktury()
     cout << "1. Tablica Dynamiczna (1)" << endl;
     cout << "2. Lista Dwukierunkowa (2)" << endl;
     cout << "3. Kopiec Binarny (3)" << endl;
-    cout << "4. Drzewo BST (4)" << endl;
-    cout << "5. Drzewo Czerwono-Czarne (5)" << endl;
-    cout << "6. Wroc (powrot)" << endl;
+    cout << "4. Drzewo Czerwono-Czarne (4)" << endl;
+    cout << "5. Zamknij program (powrot)" << endl;
     cout << "Wybierz opcje: ";
     powrot = false;                                             //Wczytanie danych z konsoli do 'wejscie' i wywo³anie menu wybranej struktury.
     while (!powrot)
@@ -29,50 +28,25 @@ void Menu::wyborStruktury()
         else if (wejscie == "1")
         {
             tablica = new TablicaDynamiczna();
+
             menuTablicy();
         }
         else if (wejscie == "2")
         {
             lista = new ListaDwukierunkowa(); 
+
             menuListy();
         }
         else if (wejscie == "3")
         {
             kopiec = new KopiecBinarny();
+
             menuKopca();
         }
-        else if (wejscie == "4") 
+
+        else if (wejscie == "4")
         {
-            drzewoBST = new DrzewoBST();
-
-            cout << endl;                                               //Wybór operacji.
-            cout << "Menu dla drzewa BST:" << endl;
-            cout << "1. Wczytaj z pliku (1)" << endl;
-            cout << "2. Usun (2)" << endl;
-            cout << "3. Dodaj (3)" << endl;
-            cout << "4. Znajdz (4)" << endl;
-            cout << "5. Utworz losowo (5)" << endl;
-            cout << "6. Wyswietl (6)" << endl;
-            cout << "7. Testuj (7)" << endl;
-            cout << "8. Wroc (powrot)" << endl;
-            cout << "Wybierz opcje: ";
-
-            menuBST();
-        }
-
-        else if (wejscie == "5")
-        {
-            cout << endl;                                               //Wybór operacji.
-            cout << "Menu dla drzewa BST:" << endl;
-            cout << "1. Wczytaj z pliku (1)" << endl;
-            cout << "2. Usun (2)" << endl;
-            cout << "3. Dodaj (3)" << endl;
-            cout << "4. Znajdz (4)" << endl;
-            cout << "5. Utworz losowo (5)" << endl;
-            cout << "6. Wyswietl (6)" << endl;
-            cout << "7. Testuj (7)" << endl;
-            cout << "8. Wroc (powrot)" << endl;
-            cout << "Wybierz opcje: ";
+            drzewoRB = new DrzewoRB();
 
             menuRB();
         }
@@ -81,29 +55,54 @@ void Menu::wyborStruktury()
 
 void Menu::menuTablicy()
 {
+
     cout << endl;                                               //Wybór operacji.
     cout << "Menu dla tablicy:" << endl;
-    cout << "1. Wczytaj z pliku (T1)" << endl;
-    cout << "2. Usun (T2)" << endl;
-    cout << "3. Dodaj (T3)" << endl;
-    cout << "4. Znajdz (T4)" << endl;
-    cout << "5. Utworz losowo (T5)" << endl;
-    cout << "6. Wyswietl (T6)" << endl;
-    cout << "7. Testuj (T7)" << endl;
+    cout << "1. Wczytaj z pliku (1)" << endl;
+    cout << "2. Usun (do wyboru poczatek, koniec, wybrane inne miejsce) (2)" << endl;
+    cout << "3. Dodaj (do wyboru poczatek, koniec, wybrane inne miejsce) (3)" << endl;
+    cout << "4. Znajdz (4)" << endl;
+    cout << "5. Utworz losowo (5)" << endl;
+    cout << "6. Wyswietl (6)" << endl;
+    cout << "7. Testuj (7)" << endl;
     cout << "8. Wroc (powrot)" << endl;
     cout << "Wybierz opcje: ";
 
-    powrot = false;
     while (!powrot)
     {
         cin >> wejscie;
-        if (wejscie == "T1") wczytajPlikDoTablicy();
-        else if (wejscie == "T2") usunTablica();
-        else if (wejscie == "T3") dodajTablica();
-        else if (wejscie == "T4") znajdzTablica();
-        else if (wejscie == "T5") stworzLosowoTablica();
-        else if (wejscie == "T6") wyswietlTablica();
-        else if (wejscie == "T7") testTablica();
+        if (wejscie == "1") wczytajPlikDoTablicy();
+        else 
+            if (wejscie == "2")
+            {
+                cout << "Opcje usuwania:" << endl;
+                cout << "Usuwanie z poczatku (1)" << endl;
+                cout << "Usuwanie z konca (2)" << endl;
+                cout << "Usuwanie z dowolnego wybranego miejsca (3)" << endl;
+
+                cin >> wejscie2;
+                if (wejscie2 == "1") usunTablica(1);
+                else if (wejscie2 == "2") usunTablica(2);
+                else if (wejscie2 == "3") usunTablica(3);
+            }
+        else 
+            if (wejscie == "3")
+            {
+                cout << "Opcje dodawania:" << endl;
+                cout << "Dodawanie na poczatek (1)" << endl;
+                cout << "Dodawanie na koniec (2)" << endl;
+                cout << "Dodawanie w inne dowolnie wybrane miejsce (3)" << endl;
+
+                cin >> wejscie2;
+                if (wejscie2 == "1") dodajTablica(1);
+                else if (wejscie2 == "2") dodajTablica(2);
+                else if (wejscie2 == "3") dodajTablica(3);
+
+            }
+        else if (wejscie == "4") znajdzTablica();
+        else if (wejscie == "5") stworzLosowoTablica();
+        else if (wejscie == "6") wyswietlTablica();
+        else if (wejscie == "7") testTablica();
         else if (wejscie == "powrot") powrot = true;
         else cout << "Nieznane polecenie!" << endl;
     }
@@ -136,40 +135,51 @@ void Menu::wczytajPlikDoTablicy()
     menuTablicy();
 }
 
-void Menu::usunTablica()
+void Menu::usunTablica(int wybor)
 {
-    int indeks;
-    cout << "\nPodaj indeks elementu do usuniecia: ";
-    cin >> indeks;
-    try
+    if (wybor == 1) tablica->usun(0);
+    else if (wybor == 2) tablica->usunKoniec();
+    else
     {
-        tablica->usun(indeks);
-        wyswietlTablica();
+        int indeks;
+        cout << "\nPodaj indeks elementu do usuniecia: ";
+        cin >> indeks;
+        try
+        {
+            tablica->usun(indeks);
+        }
+        catch (out_of_range& e)
+        {
+            cout << e.what() << endl;
+        }
     }
-    catch (out_of_range& e)
-    {
-        cout << e.what() << endl;
-    }
+    wyswietlTablica();
     menuTablicy();
 }
 
-void Menu::dodajTablica()
+void Menu::dodajTablica(int wybor)
 {
-    int indeks;
     int elem;
-    cout << "\nPodaj indeks elementu do dodania: ";
-    cin >> indeks;
     cout << "Podaj wartosc elementu: ";
     cin >> elem;
-    try
+
+    if (wybor == 1) tablica->dodajNaPocz(elem);
+    else if (wybor == 2) tablica->dodajNaKon(elem);
+    else
     {
-        tablica->dodaj(indeks, elem);
-        wyswietlTablica();
+        int indeks;
+        cout << "\nPodaj indeks elementu do dodania: ";
+        cin >> indeks;
+        try
+        {
+            tablica->dodaj(indeks, elem);
+        }
+        catch (out_of_range& e)
+        {
+            cout << e.what() << endl;
+        }
     }
-    catch (out_of_range& e)
-    {
-        cout << e.what() << endl;
-    }
+    wyswietlTablica();
     menuTablicy();
 }
 
@@ -178,8 +188,9 @@ void Menu::znajdzTablica()
     int elem;
     cout << "\nPodaj wartosc elementu: ";
     cin >> elem;
-    if (tablica->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
-    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    int indeks = tablica->znajdz(elem);
+    if(indeks == -1) cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    else cout << "Znaleziono element o takiej wartosci! Jego indeks to:" << indeks << endl;
     wyswietlTablica();
     menuTablicy();
 }
@@ -218,29 +229,54 @@ void Menu::testTablica()                                            //Stworzenie
 
 void Menu::menuListy()
 {
+
     cout << endl;                                                   //Wybór operacji.
     cout << "Menu dla listy:" << endl;
-    cout << "1. Wczytaj z pliku (L1)" << endl;
-    cout << "2. Usun (L2)" << endl;
-    cout << "3. Dodaj (L3)" << endl;
-    cout << "4. Znajdz (L4)" << endl;
-    cout << "5. Utworz losowo (L5)" << endl;
-    cout << "6. Wyswietl (L6)" << endl;
-    cout << "7. Testuj (L7)" << endl;
+    cout << "1. Wczytaj z pliku (1)" << endl;
+    cout << "2. Usun (do wyboru poczatek, koniec, wybrane inne miejsce) (2)" << endl;
+    cout << "3. Dodaj (do wyboru poczatek, koniec, wybrane inne miejsce) (3)" << endl;
+    cout << "4. Znajdz (4)" << endl;
+    cout << "5. Utworz losowo (5)" << endl;
+    cout << "6. Wyswietl (6)" << endl;
+    cout << "7. Testuj (7)" << endl;
     cout << "8. Wroc (powrot)" << endl;
     cout << "Wybierz opcje: ";
 
-    powrot = false;
     while (!powrot)
     {
         cin >> wejscie;
-        if (wejscie == "L1") wczytajPlikDoListy();
-        else if (wejscie == "L2") usunLista();
-        else if (wejscie == "L3") dodajLista();
-        else if (wejscie == "L4") znajdzLista();
-        else if (wejscie == "L5") stworzLosowoLista();
-        else if (wejscie == "L6") wyswietlLista();
-        else if (wejscie == "L7") testLista();
+        if (wejscie == "1") wczytajPlikDoListy();
+        else
+            if (wejscie == "2")
+            {
+                cout << "Opcje usuwania:" << endl;
+                cout << "Usuwanie z poczatku (1)" << endl;
+                cout << "Usuwanie z konca (2)" << endl;
+                cout << "Usuwanie z dowolnego wybranego miejsca (3)" << endl;
+
+                cin >> wejscie2;
+                if (wejscie2 == "1") usunLista(1);
+                else if (wejscie2 == "2") usunLista(2);
+                else if (wejscie2 == "3") usunLista(3);
+            }
+            else
+                if (wejscie == "3")
+                {
+                    cout << "Opcje dodawania:" << endl;
+                    cout << "Dodawanie na poczatek (1)" << endl;
+                    cout << "Dodawanie na koniec (2)" << endl;
+                    cout << "Dodawanie w inne dowolnie wybrane miejsce (3)" << endl;
+
+                    cin >> wejscie2;
+                    if (wejscie2 == "1") dodajLista(1);
+                    else if (wejscie2 == "2") dodajLista(2);
+                    else if (wejscie2 == "3") dodajLista(3);
+
+                }
+        else if (wejscie == "4") znajdzLista();
+        else if (wejscie == "5") stworzLosowoLista();
+        else if (wejscie == "6") wyswietlLista();
+        else if (wejscie == "7") testLista();
         else if (wejscie == "powrot") powrot = true;
         else cout << "Nieznane polecenie!" << endl;
     }
@@ -274,35 +310,46 @@ void Menu::wczytajPlikDoListy()
     menuListy();
 }
 
-void Menu::usunLista()
+void Menu::usunLista(int wybor)
 {
-    int elem;
-    cout << "\nPodaj wartosc elementu do usuniecia: ";
-    cin >> elem;
-    if (!lista->usunWartosc(elem))
-        cout << "Nie znaleziono takiego elementu!" << endl;
+    if (wybor == 1) lista->usunZPocz();
+    else if (wybor == 2) lista->usunZKon();
+    else
+    {
+        int indeks;
+        cout << "\nPodaj indeks elementu do usuniecia: ";
+        cin >> indeks;
+        lista->zakres(indeks);
+        lista->usun(indeks); 
+    }
     wyswietlLista();
     menuListy();
 }
 
-void Menu::dodajLista()
+void Menu::dodajLista(int wybor)
 {
-    int indeks;
     int elem;
-    cout << "\nPodaj indeks elementu do dodania: ";
-    cin >> indeks;
     cout << "Podaj wartosc elementu: ";
     cin >> elem;
-    try
+
+    if (wybor == 1) lista->dodajNaPocz(elem);
+    else if (wybor == 2) lista->dodajNaKon(elem);
+    else
     {
-        if (indeks == 0) lista->dodajNaPocz(elem);
-        else lista->dodajZa(indeks - 1, elem);
-        wyswietlLista();
+        int indeks;
+        cout << "\nPodaj indeks elementu do dodania: ";
+        cin >> indeks;
+        try
+        {
+            if (indeks == 0) lista->dodajNaPocz(elem);
+            else lista->dodajZa(indeks - 1, elem);
+        }
+        catch (out_of_range& e)
+        {
+            cout << e.what() << endl;
+        }
     }
-    catch (out_of_range& e)
-    {
-        cout << e.what() << endl;
-    }
+    wyswietlLista();
     menuListy();
 }
 
@@ -311,8 +358,9 @@ void Menu::znajdzLista()
     int elem;
     cout << "\nPodaj wartosc elementu: ";
     cin >> elem;
-    if (lista->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
-    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    int indeks = lista->znajdz(elem);
+    if (indeks == -1) cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
+    else cout << "Znaleziono element o takiej wartosci! Jego indeks to:" << indeks << endl;
     wyswietlLista();
     menuListy();
 }
@@ -356,27 +404,26 @@ void Menu::menuKopca()
 {
     cout << endl;                                                   //Wybór operacji.
     cout << "Menu dla kopca:" << endl;
-    cout << "1. Wczytaj z pliku (K1)" << endl;
-    cout << "2. Usun (K2)" << endl;
-    cout << "3. Dodaj (K3)" << endl;
-    cout << "4. Znajdz (K4)" << endl;
-    cout << "5. Utworz losowo (K5)" << endl;
-    cout << "6. Wyswietl (K6)" << endl;
-    cout << "7. Testuj (K7)" << endl;
+    cout << "1. Wczytaj z pliku (1)" << endl;
+    cout << "2. Usun (2)" << endl;
+    cout << "3. Dodaj (3)" << endl;
+    cout << "4. Znajdz (4)" << endl;
+    cout << "5. Utworz losowo (5)" << endl;
+    cout << "6. Wyswietl (6)" << endl;
+    cout << "7. Testuj (7)" << endl;
     cout << "8. Wroc (powrot)" << endl;
     cout << "Wybierz opcje: ";
 
-    powrot = false;
     while (!powrot)
     {
         cin >> wejscie;
-        if (wejscie == "K1") wczytajPlikDoKopca();
-        else if (wejscie == "K2") usunKopiec();
-        else if (wejscie == "K3") dodajKopiec();
-        else if (wejscie == "K4") znajdzKopiec();
-        else if (wejscie == "K5") stworzLosowoKopiec();
-        else if (wejscie == "K6") wyswietlKopiec();
-        else if (wejscie == "K7") testKopiec();
+        if (wejscie == "1") wczytajPlikDoKopca();
+        else if (wejscie == "2") usunKopiec();
+        else if (wejscie == "3") dodajKopiec();
+        else if (wejscie == "4") znajdzKopiec();
+        else if (wejscie == "5") stworzLosowoKopiec();
+        else if (wejscie == "6") wyswietlKopiec();
+        else if (wejscie == "7") testKopiec();
         else if (wejscie == "powrot") powrot = true;
         else cout << "Nieznane polecenie!" << endl;
     }
@@ -384,7 +431,6 @@ void Menu::menuKopca()
     delete kopiec;                                                   //Po wyjœciu z pêtli kopiec zostaje zdealokowany.
     wyborStruktury();
 }
-
 
 void Menu::wczytajPlikDoKopca()
 {
@@ -413,11 +459,7 @@ void Menu::wczytajPlikDoKopca()
 
 void Menu::usunKopiec()
 {
-    int elem;
-    cout << "\nPodaj wartosc elementu do usuniecia: ";
-    cin >> elem;
-    if (!kopiec->usun(elem))
-        cout << "Nie znaleziono takiego elementu!" << endl;
+    kopiec->usunKorzen();
     wyswietlKopiec();
     menuKopca();
 }
@@ -429,6 +471,7 @@ void Menu::dodajKopiec()
     cin >> elem;
     kopiec->dodaj(elem);
     
+    wyswietlKopiec();
     menuKopca();
 }
 
@@ -462,6 +505,7 @@ void Menu::wyswietlKopiec()
 {
     cout << endl;
     kopiec->wyswietlDrzewo();
+    menuKopca();
 }
 
 void Menu::testKopiec()
@@ -475,116 +519,20 @@ void Menu::testKopiec()
     menuKopca();
 }
 
-void Menu::menuBST()
-{
-    powrot = false;
-    while (!powrot)
-    {
-        cin >> wejscie;
-        if (wejscie == "1") wczytajPlikDoBST();
-        else if (wejscie == "2") usunBST();
-        else if (wejscie == "3") dodajBST();
-        else if (wejscie == "4") znajdzBST();
-        else if (wejscie == "5") stworzLosowoBST();
-        else if (wejscie == "6") wyswietlBST();
-        else if (wejscie == "7") testBST();
-        else if (wejscie == "powrot") powrot = true;
-        else cout << "Nieznane polecenie!" << endl;
-    }
-    delete drzewoBST;                                             //Po wyjœciu z pêtli tablica zostaje zdealokowana.
-    wyborStruktury();
-}
-
-void Menu::wczytajPlikDoBST() {
-
-    usunBST();
-    string nazwaPliku;
-    int licznik, elem;
-    cout << "\nPodaj nazwe pliku: ";
-    cin >> nazwaPliku;
-    ifstream plik;
-    plik.open(nazwaPliku);
-    if (plik.is_open())
-    {
-        drzewoBST = new DrzewoBST();
-        plik >> licznik;
-        for (int i = 0; i < licznik; i++)
-        {
-            plik >> elem;
-            drzewoBST->dodaj(elem);
-        }
-        wyswietlBST();
-    }
-    else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
-    plik.close();
-    menuKopca();
-}
-
-void Menu::usunBST()
-{
-    int elem;
-    cout << "\nPodaj wartosc elementu do usuniecia: ";
-    cin >> elem; 
-    drzewoBST->usun(elem);
-    wyswietlBST();
-    menuBST();
-}
-
-void Menu::dodajBST()
-{
-    int elem;
-    cout << "Podaj wartosc elementu: ";
-    cin >> elem;
-    drzewoBST->dodaj(elem);
-    wyswietlBST();
-    menuBST();
-}
-
-void Menu::znajdzBST()
-{
-    int elem;
-    cout << "\nPodaj wartosc elementu: ";
-    cin >> elem;
-    if (drzewoBST->znajdz(elem)) cout << "Znaleziono element o takiej wartosci!" << endl;
-    else cout << "Nie znaleziono elementu o takiej wartosci!" << endl;
-    menuBST();
-}
-
-void Menu::stworzLosowoBST()
-{
-    delete drzewoBST;                                               //Dealokacja listy i rezerwacja pamiêci na nowy obiekt.
-    drzewoBST = new DrzewoBST();
-    int rozm;
-    cout << "\nPodaj ilosc elementow: ";
-    cin >> rozm;
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dist(1, 1000000);
-    for (int i = 0; i < rozm; i++) drzewoBST->dodaj(dist(gen));
-    wyswietlBST();
-    menuBST();
-}
-
-void Menu::wyswietlBST()
-{
-    cout << endl;
-    drzewoBST->wyswietlDrzewo();
-}
-
-void Menu::testBST()
-{
-    auto* test = new TestBST();                               //Stworzenie obiektu klasy testu listy i uruchomienie metody.
-    test->sredniTestDodawania();
-    test->sredniTestUsuwania();
-    test->sredniTestSzukania();
-
-    delete test;
-    menuBST();
-}
-
 void Menu::menuRB()
 {
-    powrot = false;
+    cout << endl;                                               //Wybór operacji.
+    cout << "Menu dla drzewa BST:" << endl;
+    cout << "1. Wczytaj z pliku (1)" << endl;
+    cout << "2. Usun (2)" << endl;
+    cout << "3. Dodaj (3)" << endl;
+    cout << "4. Znajdz (4)" << endl;
+    cout << "5. Utworz losowo (5)" << endl;
+    cout << "6. Wyswietl (6)" << endl;
+    cout << "7. Testuj (7)" << endl;
+    cout << "8. Wroc (powrot)" << endl;
+    cout << "Wybierz opcje: ";
+
     while (!powrot)
     {
         cin >> wejscie;
@@ -604,7 +552,6 @@ void Menu::menuRB()
 
 void Menu::wczytajPlikDoRB() {
 
-    usunRB();
     string nazwaPliku;
     int licznik, elem;
     cout << "\nPodaj nazwe pliku: ";
@@ -624,7 +571,7 @@ void Menu::wczytajPlikDoRB() {
     }
     else cout << "Podana nazwa pliku jest nieprawidlowa!" << endl;
     plik.close();
-    menuKopca();
+    menuRB();
 }
 
 void Menu::usunRB()

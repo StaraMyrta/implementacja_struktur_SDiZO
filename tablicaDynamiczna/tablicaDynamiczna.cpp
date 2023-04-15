@@ -75,12 +75,12 @@ int TablicaDynamiczna::zawartosc(int indeks) {
     return baza[indeks];
 }
 
-bool TablicaDynamiczna::znajdz(int elem) {
+int TablicaDynamiczna::znajdz(int elem) {
     for (int i = 0; i < rozm; i++) {
         if (baza[i] == elem)
-            return true;
+            return i;
     }
-    return false;
+    return -1;
 }
 
 void TablicaDynamiczna::usun(int indeks) {
@@ -113,6 +113,11 @@ void TablicaDynamiczna::usun(int indeks) {
         }
         delete[] tablicaRobocza;
     }
+}
+
+void TablicaDynamiczna::usunKoniec()
+{
+    usun(rozm - 1);
 }
 
 void TablicaDynamiczna::usunLosowo()

@@ -21,7 +21,6 @@ void DrzewoRB::wyswietlDrzewo(string sp, string sn, ElemRB* p)
     }
     else
     {
-        cout << "0 - wezel czerwony, 1- wezel czarny\n";
         string t;
 
         if (p != &straznik)
@@ -46,8 +45,7 @@ void DrzewoRB::wyswietlDrzewo()
 }
 void DrzewoRB::dodaj(int number)
 {
-    // inicjujemy straznika
-    if (rozm == 0)
+    if (rozm == 0)                              //Inicjacia stra¿nika.
     {
         straznik.kolor = true;
         straznik.rodzic = &straznik;
@@ -57,122 +55,45 @@ void DrzewoRB::dodaj(int number)
     }
 
     ElemRB* wezel, * stryj;
-    // Tworzymy nowy wezel
     wezel = new ElemRB;
 
-    // Inicjujemy pola
-    wezel->lewy = &straznik;
+    wezel->lewy = &straznik;                    //Inicjacja pól.
     wezel->prawy = &straznik;
     wezel->rodzic = korzen;
     wezel->number = number;
 
-    // jezeli rodzic jest ustawiony na sentinel wezel wezel staje sie korzeniem
-    if (wezel->rodzic == &straznik)
+    if (wezel->rodzic == &straznik)             //Je¿eli rodzic jest ustawiony na stra¿nika wêze³ staje siê korzeniem.
     {
         korzen = wezel;
     }
     else
     {
-        while (true) // Szukamy liscia do zastspienia przez wezel
+        while (true)                            //Poszukiwanie liœcia do zast¹pienia przez wêze³.
         {
             if (number < wezel->rodzic->number)
             {
-                // jezeli jest lisciem
-                if (wezel->rodzic->lewy == &straznik)
+                if (wezel->rodzic->lewy == &straznik)                //Je¿eli jest lewym potomkiem wêze³ zastêpuje lewy liœæ.
                 {
-                    // wezel zastepuje lewy lisc
                     wezel->rodzic->lewy = wezel;
                     break;
                 }
-                // lewy syn staje sie ojcem
-                wezel->rodzic = wezel->rodzic->lewy;
+
+                wezel->rodzic = wezel->rodzic->lewy;                //Jeœli rodzic ma ju¿ lewego potomka wêze³ dodawany schodzi o poziom ni¿ej.
             }
             else
             {
-                // jezeli jest lisciem
-                if (wezel->rodzic->prawy == &straznik)
+                if (wezel->rodzic->prawy == &straznik)              //Analogicznie rozpatrywana jest opcja z prawym potomkiem.
                 {
-                    // wezel zastepuje prawy lisc
                     wezel->rodzic->prawy = wezel;
                     break;
                 }
-                // prawy syn staje sie ojcem
                 wezel->rodzic = wezel->rodzic->prawy;
             }
         }
-
-        // ustawiamy kolor wezla na czerwony
         wezel->kolor = false;
 
-        // ustawianie kolorow w drzewie
-        while ((wezel != korzen) && (wezel->rodzic->kolor == false))
-        {
-            // sprawdzamy czy ojciec jest lewym synem
-            if (wezel->rodzic == wezel->rodzic->rodzic->lewy)
-            {
-                // stryj jest prawym bratem ojca wezel
-                stryj = wezel->rodzic->rodzic->prawy;
-
-                // przypadek 1
-                //ojciec i wujek sa czerwoni
-                if (stryj->kolor == false)
-                {
-                    wezel->rodzic->kolor = true;
-                    stryj->kolor = true;
-                    wezel->rodzic->rodzic->kolor = false;
-                    wezel = wezel->rodzic->rodzic;
-                    continue;
-                }
-
-                // przypadek 2
-                //ojciec czerwony wujek czarny
-                // sprawdzamy czy wezel jest prawym synem
-                if (wezel == wezel->rodzic->prawy)
-                {
-                    wezel = wezel->rodzic;
-                    rotacjaWLewo(wezel);
-                    continue;
-                }
-
-                // przypadek 3
-                //wujek czarny 
-                //sprawdzamy czy wezel jest po lewej stronie
-                wezel->rodzic->kolor = true;
-                wezel->rodzic->rodzic->kolor = false;
-                rotacjaWPrawo(wezel->rodzic->rodzic);
-                break;
-            }
-            else
-            {
-                // przypadek analogiczny tylko z drugiej strony
-
-                // stryj jest lewym bratem ojca
-                stryj = wezel->rodzic->rodzic->lewy;
-
-                // przypadek 1
-                if (stryj->kolor == false)
-                {
-                    wezel->rodzic->kolor = true;
-                    stryj->kolor = true;
-                    wezel->rodzic->rodzic->kolor = false;
-                    wezel = wezel->rodzic->rodzic;
-                    continue;
-                }
-
-                // przypadek 2
-                if (wezel == wezel->rodzic->lewy)
-                {
-                    wezel = wezel->rodzic;
-                    rotacjaWPrawo(wezel);
-                }
-
-                // przypadek 3
-                wezel->rodzic->kolor = true;
-                wezel->rodzic->rodzic->kolor = false;
-                rotacjaWLewo(wezel->rodzic->rodzic);
-                break;
-            }
-        }
+        naprawDrzewo(wezel);
+        
     }
     korzen->kolor = true;
     rozm++;
@@ -223,8 +144,7 @@ void DrzewoRB::rotacjaWLewo(ElemRB* A)
 
     }
 }
-
-// analogicznie do rotacji w lewo
+//Analogicznie do rotacji w lewo.
 void DrzewoRB::rotacjaWPrawo(ElemRB* A)
 {
     ElemRB* B, * p;
@@ -264,12 +184,11 @@ void DrzewoRB::usun(int number)
     if (rozm == 0) {
         return;
     }
-    // tworzymy pomocnicze zmienne do usuwania elementow
     ElemRB* X, * Y, * Z, * W;
 
     X = korzen;
 
-    // znajdujemy odpowiedni wezel
+    //Znalezienie wêz³a
     while ((X != &straznik) && (X->number != number))
     {
         if (number < X->number)
@@ -312,7 +231,7 @@ void DrzewoRB::usun(int number)
     // ustawiamy Z tego samego ojca co Y
     Z->rodzic = Y->rodzic;
 
-    // jezeli ojciec jest straznikiem to oznacza to ze Y jest glowa
+    // jezeli rodzic jest straznikiem to oznacza to ze Y jest glowa
     // przypisujemy do korzenia Z
     if (Y->rodzic == &straznik)
     {
@@ -335,112 +254,7 @@ void DrzewoRB::usun(int number)
         X->number = Y->number;
     }
 
-    // Naprawiamy strukture jesli wezel jest czarny
-    if (Y->kolor == true)
-    {
-
-        while ((Z != korzen) && (Z->kolor == true))
-        {
-            //jezeli Z jest po lewej
-            if (Z == Z->rodzic->lewy)
-            {
-                //ustawiamy W jako brata Z 
-                W = Z->rodzic->prawy;
-
-                //Rozpoatrzamy cztery rozne przypadki
-                //kazdy przypadek to inne ustawienie wezlow
-
-                //przypadek 1
-                //brat wezla jest czerwony
-                if (W->kolor == false)
-                {
-                    W->kolor = true;
-                    Z->rodzic->kolor = false;
-                    rotacjaWLewo(Z->rodzic);
-                    W = Z->rodzic->prawy;
-                }
-
-                //przypadek 2
-                //brat jest czarny i posiada dwojke czarnych synow
-                if ((W->lewy->kolor == true) && (W->prawy->kolor == true))
-                {
-
-                    W->kolor = false;
-                    Z = Z->rodzic;
-                    continue;
-                }
-
-                //przypadek 3
-                //brat jest czarny
-                //lewy syn jest czerwony
-                //prawy syn jest czarny
-                if (W->prawy->kolor == true)
-                {
-
-                    W->lewy->kolor = true;
-                    W->kolor = false;
-                    rotacjaWPrawo(W);
-                    W = Z->rodzic->prawy;
-                }
-                //przypadek 4
-                //brat jest czarny
-                //prawy syn jest czerwony
-                W->kolor = Z->rodzic->kolor;
-                Z->rodzic->kolor = true;
-                W->prawy->kolor = true;
-                rotacjaWLewo(Z->rodzic);
-                Z = korzen; // To spowoduje zakoñczenie pêtli
-            }
-            else
-            {
-                // Przypadki lustrzane dla wezla po prawej stronie
-
-                W = Z->rodzic->lewy;
-
-                //przypadek 1
-                //brat wezla jest czerwony
-                if (W->kolor == false)
-                {
-                    W->kolor = true;
-                    Z->rodzic->kolor = false;
-                    rotacjaWPrawo(Z->rodzic);
-                    W = Z->rodzic->lewy;
-                }
-
-                //przypadek 2
-                //brat jest czarny i posiada dwojke czarnych synow
-                if ((W->lewy->kolor == true) && (W->prawy->kolor == true))
-                {
-                    W->kolor = false;
-                    Z = Z->rodzic;
-                    continue;
-                }
-
-                //przypadek 3
-                //brat jest czarny
-                //lewy syn jest czerwony
-                //prawy syn jest czarny
-                if (W->lewy->kolor == true)
-                {
-                    W->prawy->kolor = true;
-                    W->kolor = false;
-                    rotacjaWLewo(W);
-                    W = Z->rodzic->lewy;
-                }
-
-                //przypadek 4
-                //brat jest czarny
-                //prawy syn jest czerwony
-                W->kolor = Z->rodzic->kolor;
-                Z->rodzic->kolor = true;
-                W->lewy->kolor = true;
-                rotacjaWPrawo(Z->rodzic);
-
-                // To spowoduje zakoñczenie pêtli
-                Z = korzen;
-            }
-        }
-    }
+    naprawDrzewo(Y);
 
     Z->kolor = true;
     rozm--;
@@ -450,87 +264,73 @@ void DrzewoRB::usunKorzen()
 {
     usun(korzen->number);
 }
-void DrzewoRB::naprawDrzewo(ElemRB* X)
+void DrzewoRB::naprawDrzewo(ElemRB* wezel)
 {
-    ElemRB* wezel;
+    ElemRB* stryj;
 
-    while ((X != korzen) && (X->kolor == true))
+    while ((wezel != korzen) && (wezel->rodzic->kolor == false))        //Ustawianie kolorow w drzewie, kiedy rodzic jest czerwony.
     {
-
-        if (X == X->rodzic->lewy)
+        //Jeœli rodzic jest lewym synem
+        if (wezel->rodzic == wezel->rodzic->rodzic->lewy)
         {
-            wezel = X->rodzic->prawy;
+            stryj = wezel->rodzic->rodzic->prawy;
 
-            // przypadek 1
-            if (wezel->kolor == false)
+            //przypadek 1
+            //Rodzic i stryj s¹ czerwoni.
+            if (stryj->kolor == false)
             {
-                wezel->kolor = true;
-                X->rodzic->kolor = false;
-                rotacjaWLewo(X->rodzic);
-                wezel = X->rodzic->prawy;
+                wezel->rodzic->kolor = true;
+                stryj->kolor = true;
+                wezel->rodzic->rodzic->kolor = false;
+                wezel = wezel->rodzic->rodzic;
+                continue;
             }
 
-            // przypadek 2
-            if ((wezel->lewy->kolor == true) && (wezel->prawy->kolor == true))
+            //przypadek 2
+            //Rodzic czerwony, a stryj czarny.
+            //Sprawdzenie po³o¿enia wêz³a (opca prawy syn).
+            if (wezel == wezel->rodzic->prawy)
             {
-                wezel->kolor = false;
-                X = X->rodzic;
+                wezel = wezel->rodzic;
+                rotacjaWLewo(wezel);
                 continue;
             }
 
             // przypadek 3
-            if (wezel->prawy->kolor == true)
-            {
-                wezel->lewy->kolor = true;
-                wezel->kolor = false;
-                rotacjaWPrawo(wezel);
-                wezel = X->rodzic->prawy;
-            }
-
-            // przypadek 4
-            wezel->kolor = X->rodzic->kolor;
-            X->rodzic->kolor = true;
-            wezel->prawy->kolor = true;
-            rotacjaWLewo(X->rodzic);
+            //Rodzic czerwony, a stryj czarny.
+            //Sprawdzenie po³o¿enia wêz³a (opca lewy syn).
+            wezel->rodzic->kolor = true;
+            wezel->rodzic->rodzic->kolor = false;
+            rotacjaWPrawo(wezel->rodzic->rodzic);
+            break;
         }
         else
         {
-            wezel = X->rodzic->lewy;
+            stryj = wezel->rodzic->rodzic->lewy;            //Analogicznie, gdzy rodzic jest czarny.
 
             // przypadek 1
-            if (wezel->kolor == false)
+            if (stryj->kolor == false)
             {
-                wezel->kolor = true;
-                X->rodzic->kolor = false;
-                rotacjaWPrawo(X->rodzic);
-                wezel = X->rodzic->lewy;
-            }
-
-            // przypadek 2
-            if ((wezel->lewy->kolor == true) && (wezel->prawy->kolor == true))
-            {
-                wezel->kolor = false;
-                X = X->rodzic;
+                wezel->rodzic->kolor = true;
+                stryj->kolor = true;
+                wezel->rodzic->rodzic->kolor = false;
+                wezel = wezel->rodzic->rodzic;
                 continue;
             }
 
-            // przypadek 3
-            if (wezel->lewy->kolor == true)
+            // przypadek 2
+            if (wezel == wezel->rodzic->lewy)
             {
-                wezel->prawy->kolor = true;
-                wezel->kolor = false;
-                rotacjaWLewo(wezel);
-                wezel = X->rodzic->lewy;
+                wezel = wezel->rodzic;
+                rotacjaWPrawo(wezel);
             }
 
-            // przypadek 4
-            wezel->kolor = X->rodzic->kolor;
-            X->rodzic->kolor = true;
-            wezel->lewy->kolor = true;
-            rotacjaWPrawo(X->rodzic);
+            // przypadek 3
+            wezel->rodzic->kolor = true;
+            wezel->rodzic->rodzic->kolor = false;
+            rotacjaWLewo(wezel->rodzic->rodzic);
+            break;
         }
-        // warunek konczacy petle
-        X = korzen;
     }
 }
 ElemRB* DrzewoRB::minimum(ElemRB* p)
@@ -542,25 +342,16 @@ ElemRB* DrzewoRB::minimum(ElemRB* p)
 
     return p;
 }
-
 ElemRB* DrzewoRB::nastepnik(ElemRB* p)
 {
-    // tworzymy pomocnicz¹ zmienn¹
     ElemRB* r;
 
-    // jezeli p nie jest straznikiem
     if (p != &straznik)
     {
-        // jezeli prawy syn p nie jest straznikiem
         if (p->prawy == &straznik)
         {
-            // r ustawiamy na ojca p
             r = p->rodzic;
 
-            // dopoki r jest rozne od straznika i p == prawemu synowi r
-            // przypisujemy r do p
-            // przypisujemy do r ojca r
-            // jezeli p jest lewym synem to konczymy
             while ((r != &straznik) && (p == r->prawy))
             {
                 p = r;
@@ -568,20 +359,16 @@ ElemRB* DrzewoRB::nastepnik(ElemRB* p)
             }
             return r;
         }
-        // zwracamy minimum
         return minimum(p->prawy);
     }
-    // zwracamy puste
     return &straznik;
 }
-int DrzewoRB::znajdz(int number)
+bool DrzewoRB::znajdz(int number)
 {
-    // tworzymy pomocniczy element
     ElemRB* p;
 
     p = korzen;
-    // iterujemy po kazdym elemencie
-    // szukajac poprawnej wartosci
+
     while ((p != &straznik) && (p->number != number))
         if (number < p->number)
         {
@@ -595,11 +382,11 @@ int DrzewoRB::znajdz(int number)
 
     if (p == &straznik)
     {
-        return -1;
+        return false;
     }
 
     else
     {
-        return 1;
+        return true;
     }
 }

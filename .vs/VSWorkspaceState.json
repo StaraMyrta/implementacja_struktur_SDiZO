@@ -3,14 +3,13 @@
     "",
     "\\Drzewa",
     "\\Drzewa\\DrzewoRB",
-    "\\KopiecBinarny",
     "\\Menu",
     "\\Testy",
-    "\\Testy\\TestDrzewaBST",
     "\\Testy\\TestDrzewaRB",
     "\\Testy\\TestKopca",
-    "\\Testy\\TestListy"
+    "\\Testy\\TestListy",
+    "\\Testy\\TestTablicy"
   ],
-  "SelectedNode": "\\Testy\\TestDrzewaRB\\TestDrzewaRB.cpp",
+  "SelectedNode": "\\Testy\\TestTablicy\\TestTablicy.cpp",
   "PreviewInSolutionExplorer": false
 }

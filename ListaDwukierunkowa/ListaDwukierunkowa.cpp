@@ -99,15 +99,17 @@ int ListaDwukierunkowa::zawartosc(int indeks)
     return szukajElem->wartosc;
 }
 
-bool ListaDwukierunkowa::znajdz(int elem)
+int ListaDwukierunkowa::znajdz(int elem)
 {
+    int indeks = 0;
     ElemListy* elemPorownawczy = poczatek;                          //Przeszukanie listy przechodz¹c od pocz¹tku do koñca w celu znalezienia zadanego elementu. Zwraca true - jeœli element zostanie znaleziony.
     while (elemPorownawczy != nullptr)
     {
-        if (elemPorownawczy->wartosc == elem) return true;
+        if (elemPorownawczy->wartosc == elem) return indeks;
         elemPorownawczy = elemPorownawczy->nast;
+        indeks++;
     }
-    return false;
+    return -1;
 }
 
 bool ListaDwukierunkowa::usunWartosc(int elem)
@@ -150,9 +152,8 @@ void ListaDwukierunkowa::usunLosowo()
 
 void ListaDwukierunkowa::zakres(int indeks)
 {
-
     if (indeks < 0 || indeks >(rozm - 1))                       //Jeœli podany indeks jest mniejszy od zera lub wiêkszy od wielkoœci listy, rzucenie wyj¹tku.
-    throw out_of_range(EXCEPTION_RANGE_DESC);
+    throw out_of_range(EXCEPTION_DESC);
 }
 
 ElemListy* ListaDwukierunkowa::zawartoscElem(int indeks)
